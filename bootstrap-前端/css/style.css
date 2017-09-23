@@ -1,0 +1,43 @@
+@media screen and (min-width: 300px) and (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+}
+
+.list-group-item .row {
+    /*max-height: 223.5px;*/
+}
+
+
+
+
+body {
+    padding-top: 50px;
+}
+
+ul.tag {
+    padding-left: 15px;
+}
+
+ul.tag>li {
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.top {
+    margin-top: 15px;
+}
+.bottom{
+    margin-bottom: 15px;
+}
+.top-50 {
+    margin-top: 50px;
+}
+.bottom-50{
+    margin-bottom: 50px;
+}
+.text-nowrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
