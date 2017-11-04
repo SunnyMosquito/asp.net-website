@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>admin</title>
+    <title>moviechange</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -26,13 +26,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">拉普达</a>
+                <a class="navbar-brand" href="/">拉普达</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a>欢迎,admin</a></li>
                     <li><a href="/">去我的网站</a></li>
-                    <li><a href="../navbar-static-top/">退出</a></li>
+                    <li><a href="?logout=true">退出</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -50,17 +50,17 @@
                 <form role="form">
                     <div class="form-group">
                         <label for="name">名称</label>
-                        <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                        <input type="text" class="form-control" id="name" placeholder="请输入名称" name="name">
                     </div>
                     <div class="form-group">
                         <label for="image">图像</label>
-                        <input type="file" id="image">
+                        <input type="file" id="image" name="image">
                         <p class="help-block">请选择图像，下面是当前图像</p>
                         <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1109204397,2942247306&fm=27&gp=0.jpg" alt="">
                     </div>
                     <div class="form-group">
                         <label for="summary">简介</label>
-                        <textarea class="form-control" id="summary" placeholder="请输入名称" rows="5"></textarea>
+                        <textarea class="form-control" id="summary" placeholder="请输入名称" rows="5" name="summary"></textarea>
                     </div>
                     <div class="checkbox">
                         <label>
@@ -136,7 +136,226 @@
     <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrapValidator.js"></script>
-    <script type="text/javascript" src="js/validator.js">
+    <script type="text/javascript">
+    $(function() {
+        $('form').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                name: {
+                    message: '名称验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '名称不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 50,
+                            message: '名称长度必须在1到50位之间'
+                        },
+                        regexp: {
+                            regexp: /^[^'"`‘“]+$/,
+                            message: '名称包含敏感字符'
+                        }
+                    }
+                },
+                image: {
+                    validators: {
+                        notEmpty: {
+                            message: '图像不能为空'
+                        }
+                    }
+                },
+                summary: {
+                    message: '简介验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '简介不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 200,
+                            message: '名称长度必须在1到200位之间'
+                        },
+                        regexp: {
+                            regexp: /^[^'"]+$/,
+                            message: '名称包含敏感字符'
+                        }
+                    }
+                },
+                boxoffice: {
+                    validators: {
+                        notEmpty: {
+                            message: '票房不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 50,
+                            message: '名称长度必须在1到50位之间'
+                        },
+                        regexp: {
+                            regexp: /^[^'"]+$/,
+                            message: '名称包含敏感字符'
+                        }
+                    }
+                },
+                grade: {
+                    validators: {
+                        notEmpty: {
+                            message: '评分不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 10,
+                            message: '评分长度必须在1到10位之间'
+                        },
+                        regexp: {
+                            regexp: /^([0-9]+.[0-9]+)|[0-9]+$/,
+                            message: '请输入正确的分数'
+                        }
+                    }
+                },
+                url: {
+                    validators: {
+                        notEmpty: {
+                            message: '票房不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 200,
+                            message: '名称长度必须在1到200位之间'
+                        },
+                        regexp: {
+                            regexp: /^[^'"]+$/,
+                            message: '名称包含敏感字符'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        },
+                        stringLength: {
+                            min: 4,
+                            max: 18,
+                            message: '密码长度必须在4到18位之间'
+                        },
+                    }
+                },
+                type: {
+                    validators: {
+                        notEmpty: {
+                            message: '类型不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 50,
+                            message: '类型长度必须在1到50位之间'
+                        },
+                    }
+                },
+                duration: {
+                    validators: {
+                        notEmpty: {
+                            message: '时长不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 10,
+                            message: '时长长度必须在1到10位之间'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: '只能输入数字'
+                        }
+                    }
+                },
+                director: {
+                    validators: {
+                        notEmpty: {
+                            message: '导演不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 50,
+                            message: '名称长度必须在1到50位之间'
+                        },
+                        regexp: {
+                            regexp: /^[^'"]+$/,
+                            message: '名称包含敏感字符'
+                        }
+                    }
+                },
+                scriptwriter: {
+                    validators: {
+                        notEmpty: {
+                            message: '编剧不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 50,
+                            message: '编剧长度必须在1到50位之间'
+                        },
+                        regexp: {
+                            regexp: /^[^'"]+$/,
+                            message: '包含敏感字符'
+                        }
+                    }
+                },
+                scriptwriter: {
+                    validators: {
+                        notEmpty: {
+                            message: '演员不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 200,
+                            message: '演员长度必须在1到200位之间'
+                        },
+                        regexp: {
+                            regexp: /^[^'"]+$/,
+                            message: '包含敏感字符'
+                        }
+                    }
+                },
+                date_release:{
+                    validators:{
+                        notEmpty: {
+                            message: '时间不能为空'
+                        }
+                    }
+                },
+                language: {
+                    validators: {
+                        notEmpty: {
+                            message: '语言不能为空'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 20,
+                            message: '语言长度必须在1到20位之间'
+                        },
+                        regexp: {
+                            regexp: /^[^'"]+$/,
+                            message: '包含敏感字符'
+                        }
+                    }
+                },
+                category_id: {
+                    validators: {
+                        notEmpty: {
+                            message: '分类不能为空'
+                        }
+                    }
+                },
+            }
+        });
+    });
     </script>
 </body>
 
