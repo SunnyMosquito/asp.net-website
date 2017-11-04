@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">拉普达</a>
+                <a class="navbar-brand" href="<%= Request.ApplicationPath %>">拉普达</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -56,7 +56,7 @@
             <div class="col-md-3 col-sm-2 col-xs-1 column">
             </div>
             <div class="col-md-6 col-sm-8 col-xs-10 column">
-                <form role="form" action="<%# Request.Url %>" method="post">
+                <form role="form" action="<%= Request.Url %>" method="post">
                     <div class="form-group">
                         <label for="InputUserName">User Name</label>
                         <input type="text" name="username" class="form-control" id="InputUserName" />
@@ -99,7 +99,7 @@
     <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrapValidator.js"></script>
-    <script type="text/javascript" src="js/validator.js?d=<%# DateTime.Now %> ">
+    <script type="text/javascript" src="js/validator.js?d=<%= DateTime.Now %> ">
     </script>
 </body>
 

@@ -100,7 +100,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="WebForm1.aspx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -137,6 +136,7 @@
     <Content Include="js\jquery-3.2.1.js" />
     <Content Include="js\validator.js" />
     <Content Include="login.aspx" />
+    <Content Include="moviechange.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -164,15 +164,15 @@
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="model.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLiteHlper.cs" />
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="moviechange.aspx.cs">
+      <DependentUpon>moviechange.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="moviechange.aspx.designer.cs">
+      <DependentUpon>moviechange.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLiteHlper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />

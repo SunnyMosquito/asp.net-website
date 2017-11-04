@@ -102,4 +102,124 @@ namespace moviesite
             set { address = value; }
         }
     }
+
+    public class Movie
+    {
+        private int movieid;
+        public int MovieId
+        {
+            get { return movieid; }
+            set { movieid = value; }
+        }
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        private string image;
+        public string Image
+        {
+            get { return image; }
+            set { image = value; }
+        }
+        private string summary;
+        public string Summary
+        {
+            get { return summary; }
+            set { summary = value; }
+        }
+        private string isrecommend;
+        public string IsRecommend
+        {
+            get { return isrecommend; }
+            set { isrecommend = value; }
+        }
+        private int clickcount;
+        public int Clickount
+        {
+            get { return clickcount; }
+            set { clickcount = value; }
+        }
+        private string boxoffice;
+        public string BoxOffice
+        {
+            get { return boxoffice; }
+            set { boxoffice = value; }
+        }
+        private double grade;
+        public double Grade
+        {
+            get { return grade; }
+            set { grade = value; }
+        }
+        private string url;
+        public string Url
+        {
+            get { return url; }
+            set { url = value; }
+        }
+        private string password;
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+        private DateTime dateupload;
+        public DateTime DateUpload
+        {
+            get { return dateupload; }
+            set { dateupload = value; }
+        }
+        private string type;
+        public string Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+        private int duration;
+        public int Duration
+        {
+            get { return duration; }
+            set { duration = value; }
+        }
+        private string director;
+        public string Director
+        {
+            get { return director; }
+            set { director = value; }
+        }
+        private string scriptwriter;
+        public string Scriptwriter
+        {
+            get { return scriptwriter; }
+            set { scriptwriter = value; }
+        }
+        private string actor;
+        public string Actor
+        {
+            get { return actor; }
+            set { actor = value; }
+        }
+        private DateTime date_release;
+        public DateTime DateRelease
+        {
+            get { return date_release; }
+            set { date_release = value; }
+
+        
+        }
+        private string language;
+        public string Language
+        {
+            get { return language; }
+            set { language = value; }
+        }
+        private int category_id;
+        public int CategoryId
+        {
+            get { return category_id; }
+            set { category_id = value; }
+        }
+    }
 }
