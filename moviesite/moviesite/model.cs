@@ -222,4 +222,21 @@ namespace moviesite
             set { category_id = value; }
         }
     }
+
+    public class Category
+    {
+        private int categoryid;
+        public int Categoryid
+        {
+            get { return categoryid; }
+            set { categoryid = value; }
+        }
+
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+    }
 }

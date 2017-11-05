@@ -11,6 +11,7 @@ namespace moviesite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Response.Write(Server.MapPath("002.jpg"));
 
             if (Request.RequestType.ToLower() == "post")
             {

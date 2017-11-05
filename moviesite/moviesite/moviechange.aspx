@@ -47,7 +47,7 @@
                 <div class="page-header">
                     <h1>更改movie</h1>
                 </div>
-                <form role="form">
+                <form role="form" action="<%= Request.Url %>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name">名称</label>
                         <input type="text" class="form-control" id="name" placeholder="请输入名称" name="name">
@@ -64,7 +64,7 @@
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="is_recommend">是否推荐
+                            <input type="checkbox" name="isrecommend">是否推荐
                         </label>
                     </div>
                     <div class="form-group">
@@ -100,22 +100,24 @@
                         <input type="text" class="form-control" id="scriptwriter" placeholder="请输入编剧" name="scriptwriter">
                     </div>
                     <div class="form-group">
-                        <label for="director">演员</label>
-                        <input type="text" class="form-control" id="director" placeholder="请输入演员" name="director">
+                        <label for="actor">演员</label>
+                        <input type="text" class="form-control" id="actor" placeholder="请输入演员" name="director">
                     </div>
                     <div class="form-group">
                         <label for="date_release">上映时间</label>
-                        <input type="date" class="form-control" id="date_release" name="date_release">
+                        <input type="date" class="form-control" id="date_release" name="daterelease">
                     </div>
                     <div class="form-group">
                         <label for="language">语言</label>
                         <input type="text" class="form-control" id="language" placeholder="请输入语言" name="language">
                     </div>
                     <div class="form-group">
-                        <label for="category_id">选择列表</label>
-                        <select class="form-control" id="category_id" name="category_id">
-                            <option>1</option>
-                            <option>2</option>
+                        <label for="category_id">分类</label>
+                        <select class="form-control" id="category_id" name="categoryid">
+                            <% foreach (moviesite.Category li in category)
+                                { %>
+                                <option value="<%= li.Categoryid %>"><%= li.Name %></option>
+                            <% } %>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-default">提交</button>
