@@ -12,14 +12,14 @@ namespace moviesite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["username"] == null)
-            {
-                Response.Redirect("~/login.aspx?next=" + HttpContext.Current.Request.Path);
-            }
-            if (!(Session["is_superuser"].ToString()=="true"))
-            {
-                Response.Redirect("~/index.aspx");
-            }
+            //if (Session["username"] == null)
+            //{
+            //    Response.Redirect("~/login.aspx?next=" + HttpContext.Current.Request.Path);
+            //}
+            //if (!(Session["is_superuser"].ToString()=="true"))
+            //{
+            //    Response.Redirect("~/index.aspx");
+            //}
             if (Request.QueryString["delete"]!=null)
             {
                 string sql = string.Format("delete from movie where id=@para1");
