@@ -28,7 +28,7 @@ namespace moviesite
                 };
                 if (SQLiteHelper.ExecuteSql(sql,sps) > 0)
                 {
-                    Response.Redirect("index.aspx");
+                    Response.Redirect("admin.aspx");
                 }
             }
             

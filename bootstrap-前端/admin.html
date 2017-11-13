@@ -98,14 +98,18 @@
                     </li>
                     <li class='tab-pane fade' id='tab2'>
                         <table class="table table-condensed">
-                            <caption>电影列表</caption>
+                            <caption>用户列表</caption>
                             <thead>
                                 <tr>
-                                    <th>名称</th>
-                                    <th>上映日期</th>
-                                    <th>票房</th>
-                                    <th>评分</th>
-                                    <th>change</th>
+                                    <th>用户名</th>
+                                    <th>个性签名</th>
+                                    <th>全名</th>
+                                    <th>邮箱</th>
+                                    <th>手机号码</th>
+                                    <th>qq号码</th>
+                                    <th>个人网站</th>
+                                    <th>地址</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,33 +118,52 @@
                                     <td>Bangalore</td>
                                     <td>560001</td>
                                     <td>Tanmay</td>
-                                    <td><a href="#" class="badge">修改</a><a href="#" class="badge">删除</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Sachin</td>
-                                    <td>Mumbai</td>
-                                    <td>400003</td>
-                                    <td>Badgalore</td>
-                                    <td><a href="#" class="badge">修改</a><a href="#" class="badge">删除</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Uma</td>
-                                    <td>Pune</td>
-                                    <td>411027</td>
                                     <td>Tanmay</td>
-                                    <td><a href="#" class="badge">修改</a><a href="#" class="badge">删除</a></td>
+                                    <td>Bangalore</td>
+                                    <td>560001</td>
+                                    <td>Tanmay</td>
+                                    <td><a href="#" class="badge" data-toggle="modal" data-target="#userchange">修改</a><a href="?delete=true&userid=1" class="badge">删除</a></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-primary">新增电影</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#useradd">新增用户</button>
                     </li>
                     <li class='tab-pane fade' id='tab3'>
-                        <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                        </ul>
-                        <button class="btn btn-primary">新增电影</button>
+                        <form role="form">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="form-group">
+                                    	<h4>当前广告</h4>
+                                        <img src="img/aa8df3d16e4209cb64ccfe609ab0985d.jpg" style="max-height: 100px;">
+                                        <input type="file" id="avatar" name="avatar1" />
+                                        <p class="help-block">
+                                            请选择你的广告。。。
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="form-group">
+                                    	<h4>当前广告</h4>
+                                        <img src="img/aa8df3d16e4209cb64ccfe609ab0985d.jpg" style="max-height: 100px;">
+                                        <input type="file" id="avatar" name="avatar2" />
+                                        <p class="help-block">
+                                            请选择你的广告。。。
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="form-group">
+                                    	<h4>当前广告</h4>
+                                        <img src="img/aa8df3d16e4209cb64ccfe609ab0985d.jpg" style="max-height: 100px;">
+                                        <input type="file" id="avatar" name="avatar3" />
+                                        <p class="help-block">
+                                            请选择你的广告。。。
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <button type="submit" class="btn btn-primary">保存更改</button>
+                        </form>
                     </li>
                     <li class='tab-pane fade' id='tab4'>
                         <table class="table table-condensed">
@@ -218,37 +241,101 @@
                         </table>
                         <a class="btn btn-primary">新增电影</a>
                     </li>
+                    <!--修改用户 模态框（Modal） -->
+                    <div class="modal fade" id="userchange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form role="form">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">修改用户信息</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="name">名字</label>
+                                            <input type="text" name="name" class="form-control input-sm" id="name" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">密码</label>
+                                            <input type="password" name="password" class="form-control input-sm" id="password" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">个性签名</label>
+                                            <input type="text" name="description" class="form-control input-sm" id="description" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">邮箱</label>
+                                            <input type="text" name="email" class="form-control input-sm" id="email" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="qq">qq号码</label>
+                                            <input type="text" name="qq" class="form-control input-sm" id="qq" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="url">个人网址</label>
+                                            <input type="text" name="url" class="form-control input-sm" id="url" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">手机号码</label>
+                                            <input type="text" name="phone" class="form-control input-sm" id="phone" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">地址</label>
+                                            <input type="text" name="address" class="form-control input-sm" id="address" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="submit" class="btn btn-primary">提交更改</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal -->
+                    </div>
+                    <!--新增用户 模态框（Modal） -->
+                    <div class="modal fade" id="useradd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form role="form">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">新增用户</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="username">User Name</label>
+                                            <input type="text" name="username" class="form-control" id="username" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" name="password" class="form-control" id="password" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="avatar">头像</label>
+                                            <input type="file" id="avatar" name="avatar" />
+                                            <p class="help-block">
+                                                请选择你的头像。。。
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" name="name" class="form-control" id="name" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="submit" class="btn btn-primary">提交更改</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal -->
+                    </div>
             </div>
         </div>
-        <!-- <div class="row">
-            <div class="col-md-9">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">site administration</h3>
-                    </div>
-                    <div class="panel-body">
-                        <li class="list-group-item text-nowrap"><a href="#">免费域名注册</a><a href="#" class="badge">add</a></li>
-                        <li class="list-group-item text-nowrap"><a href="#">免费 Window 空间托管</a><a href="#" class="badge">add</a></li>
-                        <li class="list-group-item text-nowrap"><a href="#">图像的数图像的数量图像的数量图</a><a href="#" class="badge">add</a></li>
-                        <li class="list-group-item text-nowrap"><a href="#">每年更新成本</a><a href="#" class="badge">add</a></li>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item">免费域名注册</li>
-                    <li class="list-group-item">免费 Window 空间托管</li>
-                    <li class="list-group-item">图像的数量</li>
-                    <li class="list-group-item">
-                        <span class="badge">新</span> 24*7 支持
-                    </li>
-                    <li class="list-group-item">每年更新成本</li>
-                    <li class="list-group-item">
-                        <span class="badge">新</span> 折扣优惠
-                    </li>
-                </ul>
-            </div>
-        </div> -->
     </div>
     </div>
     <!-- end container  -->
