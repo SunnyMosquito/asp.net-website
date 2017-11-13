@@ -50,74 +50,76 @@
                 <form role="form" action="<%= Request.Url %>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name">名称</label>
-                        <input type="text" class="form-control" id="name" placeholder="请输入名称" name="name">
+                        <input type="text" class="form-control" id="name" placeholder="请输入名称" name="name" value="<%= mymovie.Name %>">
                     </div>
                     <div class="form-group">
                         <label for="image">图像</label>
                         <input type="file" id="image" name="image">
                         <p class="help-block">请选择图像，下面是当前图像</p>
-                        <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1109204397,2942247306&fm=27&gp=0.jpg" alt="">
+                        <img src="<%= mymovie.Image %>" alt="">
                     </div>
                     <div class="form-group">
                         <label for="summary">简介</label>
-                        <textarea class="form-control" id="summary" placeholder="请输入名称" rows="5" name="summary"></textarea>
+                        <textarea class="form-control" id="summary" placeholder="请输入名称" rows="5" name="summary"><%= mymovie.Summary %></textarea>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="isrecommend">是否推荐
+                            <input type="checkbox" name="isrecommend" <% if (mymovie.IsRecommend == "true")
+                                {%>checked<% } %>/>是否推荐<%= mymovie.IsRecommend %>
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="boxoffice">票房</label>
-                        <input type="text" class="form-control" id="boxoffice" placeholder="请输入票房" name="boxoffice">
+                        <input type="text" class="form-control" id="boxoffice" placeholder="请输入票房" name="boxoffice" value="<%= mymovie.BoxOffice %>">
                     </div>
                     <div class="form-group">
                         <label for="grade">评分</label>
-                        <input type="text" class="form-control" id="grade" placeholder="请输入评分" name="grade">
+                        <input type="text" class="form-control" id="grade" placeholder="请输入评分" name="grade" value="<%= mymovie.Grade %>">
                     </div>
                     <div class="form-group">
                         <label for="url">链接</label>
-                        <input type="text" class="form-control" id="url" placeholder="请输入链接" name="url">
+                        <input type="text" class="form-control" id="url" placeholder="请输入链接" name="url" value="<%= mymovie.Url %>">
                     </div>
                     <div class="form-group">
                         <label for="password">密码</label>
-                        <input type="text" class="form-control" id="password" placeholder="请输入链接密码" name="password">
+                        <input type="text" class="form-control" id="password" placeholder="请输入链接密码" name="password" value="<%= mymovie.Password %>">
                     </div>
                     <div class="form-group">
                         <label for="type">类型</label>
-                        <input type="text" class="form-control" id="type" placeholder="请输入电影类型" name="type">
+                        <input type="text" class="form-control" id="type" placeholder="请输入电影类型" name="type" value="<%= mymovie.Type %>">
                     </div>
                     <div class="form-group">
                         <label for="duration">时长</label>
-                        <input type="text" class="form-control" id="duration" placeholder="请输入电影时长" name="duration">
+                        <input type="text" class="form-control" id="duration" placeholder="请输入电影时长" name="duration" value="<%= mymovie.Duration %>">
                     </div>
                     <div class="form-group">
                         <label for="director">导演</label>
-                        <input type="text" class="form-control" id="director" placeholder="请输入导演" name="director">
+                        <input type="text" class="form-control" id="director" placeholder="请输入导演" name="director" value="<%= mymovie.Director %>">
                     </div>
                     <div class="form-group">
                         <label for="scriptwriter">编剧</label>
-                        <input type="text" class="form-control" id="scriptwriter" placeholder="请输入编剧" name="scriptwriter">
+                        <input type="text" class="form-control" id="scriptwriter" placeholder="请输入编剧" name="scriptwriter" value="<%= mymovie.Scriptwriter %>">
                     </div>
                     <div class="form-group">
                         <label for="actor">演员</label>
-                        <input type="text" class="form-control" id="actor" placeholder="请输入演员" name="director">
+                        <input type="text" class="form-control" id="actor" placeholder="请输入演员" name="actor" value="<%= mymovie.Actor %>">
                     </div>
                     <div class="form-group">
                         <label for="date_release">上映时间</label>
-                        <input type="date" class="form-control" id="date_release" name="daterelease">
+                        <input type="date" class="form-control" id="date_release" name="daterelease" value="<%= mymovie.DateRelease.ToString("yyyy-MM-dd") %>">
                     </div>
                     <div class="form-group">
                         <label for="language">语言</label>
-                        <input type="text" class="form-control" id="language" placeholder="请输入语言" name="language">
+                        <input type="text" class="form-control" id="language" placeholder="请输入语言" name="language" value="<%= mymovie.Language %>">
                     </div>
                     <div class="form-group">
                         <label for="category_id">分类</label>
                         <select class="form-control" id="category_id" name="categoryid">
                             <% foreach (moviesite.Category li in category)
                                 { %>
-                                <option value="<%= li.Categoryid %>"><%= li.Name %></option>
+                                <option value="<%= li.Categoryid %>" <% if (mymovie.CategoryId == li.Categoryid){ %>selected<% } %>><%= li.Name %></option>
                             <% } %>
+                            <option value="xixi">haha</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-default">提交</button>
