@@ -32,7 +32,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a>欢迎,admin</a></li>
                     <li><a href="/">去我的网站</a></li>
-                    <li><a href="../navbar-static-top/">退出</a></li>
+                    <li><a href="?logout=true">退出</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -80,7 +80,7 @@
                                     <td><%= movie.DateRelease %></td>
                                     <td><%= movie.BoxOffice %></td>
                                     <td><%= movie.Grade %></td>
-                                    <td><a href="moviechange.aspx?change=true&id=<%= movie.MovieId %>" class="badge">修改</a><a href="?delete=<%= movie.MovieId %>" class="badge">删除</a></td>
+                                    <td><a href="moviechange.aspx?change=true&id=<%= movie.MovieId %>" class="badge">修改</a><a href="?delete=movie&id=<%= movie.MovieId %>" class="badge">删除</a></td>
                                 </tr>
                                 <% } %>
                             </tbody>
@@ -93,7 +93,6 @@
                             <thead>
                                 <tr>
                                     <th>用户名</th>
-                                    <th>个性签名</th>
                                     <th>全名</th>
                                     <th>邮箱</th>
                                     <th>手机号码</th>
@@ -104,17 +103,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% foreach (moviesite.User user in Useres)
+                                    { %>
                                 <tr>
-                                    <td>Tanmay</td>
-                                    <td>Bangalore</td>
-                                    <td>560001</td>
-                                    <td>Tanmay</td>
-                                    <td>Tanmay</td>
-                                    <td>Bangalore</td>
-                                    <td>560001</td>
-                                    <td>Tanmay</td>
-                                    <td><a href="#" class="badge" data-toggle="modal" data-target="#userchange">修改</a><a href="?delete=true&userid=1" class="badge">删除</a></td>
+                                    <td><%= user.UserName %></td>
+                                    <td><%= user.Name %></td>
+                                    <td><%= user.Email %></td>
+                                    <td><%= user.Phone %></td>
+                                    <td><%= user.Qq %></td>
+                                    <td><%= user.Url %></td>
+                                    <td><%= user.Address %></td>
+                                    <td><a href="changeuser.aspx?changeuser=true&id=<%= user.UserId %>" class="badge">修改</a><a href="?delete=user&id=<%= user.UserId %>" class="badge">删除</a></td>
                                 </tr>
+                                <% } %>
                             </tbody>
                         </table>
                         <button class="btn btn-primary" data-toggle="modal" data-target="#useradd">新增用户</button>
@@ -157,68 +158,15 @@
                         </form>
                     </li>
                  </ul>
-
-                <!--修改用户 模态框（Modal） -->
-                    <div class="modal fade" id="userchange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form role="form">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title" id="myModalLabel">修改用户信息</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="name">名字</label>
-                                            <input type="text" name="name" class="form-control input-sm" id="name" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">密码</label>
-                                            <input type="password" name="password" class="form-control input-sm" id="password" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="description">个性签名</label>
-                                            <input type="text" name="description" class="form-control input-sm" id="description" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">邮箱</label>
-                                            <input type="text" name="email" class="form-control input-sm" id="email" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="qq">qq号码</label>
-                                            <input type="text" name="qq" class="form-control input-sm" id="qq" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="url">个人网址</label>
-                                            <input type="text" name="url" class="form-control input-sm" id="url" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="phone">手机号码</label>
-                                            <input type="text" name="phone" class="form-control input-sm" id="phone" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="address">地址</label>
-                                            <input type="text" name="address" class="form-control input-sm" id="address" />
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="submit" class="btn btn-primary">提交更改</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal -->
-                    </div>
+                
                 <!--新增用户 模态框（Modal） -->
                     <div class="modal fade" id="useradd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form role="form">
+                                <form role="form" action="admin.aspx?adduser=true" method="post" enctype="multipart/form-data">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title" id="myModalLabel">新增用户</h4>
+                                        <h4 class="modal-title" id="myModalLabel2">新增用户</h4>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">

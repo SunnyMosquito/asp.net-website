@@ -311,7 +311,7 @@
                         }
                     }
                 },
-                scriptwriter: {
+                actor: {
                     validators: {
                         notEmpty: {
                             message: '演员不能为空'

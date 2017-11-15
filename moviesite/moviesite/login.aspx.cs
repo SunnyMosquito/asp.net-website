@@ -11,13 +11,12 @@ namespace moviesite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write(Server.MapPath("002.jpg"));
+            //Response.Write(Server.MapPath("002.jpg"));
 
             if (Request.RequestType.ToLower() == "post")
             {
                 string username = Request.Form["username"];
                 string password = Request.Form["password"];
-                //Response.Write("<script type='text/javascript'>alert('haha');</script>");
                 string sql = string.Format("select * from user where username=@para1 and password=@para2");
                 SQLiteParameter[] sps = new SQLiteParameter[]{
                     new SQLiteParameter("@para1",username),
@@ -26,10 +25,16 @@ namespace moviesite
                 if (SQLiteHelper.Exists(sql, sps))
                 {
                     Session["username"] = username;
+                    string id = SQLiteHelper.Query(sql, sps).Tables[0].Rows[0][0].ToString();
+                    Session["userid"] = id;
                     if (Is_superuser(username,password))
                     {
                         string next = Request.QueryString["next"];
                         Session["is_superuser"] = "true";
+                        if (next==null)
+                        {
+                            Response.Redirect("/");
+                        }
                         Response.Redirect(next);
                     }
                     else

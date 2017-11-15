@@ -36,9 +36,9 @@ namespace moviesite
                     movie.Image = SaveFile(Request.Files["image"]);//form必须要加multipart/form-data
                 }
                 movie.Summary = Request.Form["summary"];
-                if (Request.Form["isrecommend"]!=null)
+                if (Request.Form["isrecommend"] != null)
                 {
-                    if(Request.Form["isrecommend"].ToLower() == "on")
+                    if (Request.Form["isrecommend"].ToLower() == "on")
                     {
                         movie.IsRecommend = "true";
                     }
@@ -84,7 +84,7 @@ namespace moviesite
                         new SQLiteParameter("@para15",movie.Language),
                         new SQLiteParameter("@para16",movie.CategoryId)
                 };
-                if (SQLiteHelper.ExecuteSql(sql, sps)>0)
+                if (SQLiteHelper.ExecuteSql(sql, sps) > 0)
                 {
                     Response.Write("<script>alert('新增成功');window.location.href='admin.aspx';</script>");
                 }
@@ -92,7 +92,7 @@ namespace moviesite
             if (Request.QueryString["change"] == "true")
             {
                 string sql = string.Format("select * from movie where id=@para1");
-                mymovie.MovieId =Convert.ToInt32(Request.QueryString["id"]);
+                mymovie.MovieId = Convert.ToInt32(Request.QueryString["id"]);
                 SQLiteParameter[] sps = new SQLiteParameter[]
                 {
                         new SQLiteParameter("@para1",mymovie.MovieId)
@@ -192,7 +192,7 @@ namespace moviesite
             string filename = string.Format("{0}{1}{2}{3}{4}", year, month, day, DateTime.Now.ToString("mmssffff"), Path.GetExtension(f.FileName));
             string fullpath = Path.Combine(path, filename);
             f.SaveAs(Server.MapPath(fullpath));
-            return path+filename;
+            return path + filename;
         }
         public List<Category> category
         {
@@ -215,6 +215,6 @@ namespace moviesite
             }
             return list;
         }
-        public Movie mymovie=new Movie();
+        public Movie mymovie = new Movie();
     }
 }

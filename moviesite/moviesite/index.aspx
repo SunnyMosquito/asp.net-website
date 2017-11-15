@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
-
     </style>
 </head>
 
@@ -35,15 +34,24 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">剧情</a></li>
-                            <li><a href="#">动作</a></li>
-                            <li><a href="#">爱情</a></li>
+                            <% foreach (moviesite.Category cate in category)
+                                { %>
+                            <li><a href="#"><%= cate.Name %></a></li>
+                            <% } %>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/">登录</a></li>
-                    <li><a href="../navbar-static-top/">注册</a></li>
+                    <% if (Session["username"] == null)
+                        { %>
+                    <li><a href="/login.aspx">登录</a></li>
+                    <li><a href="/login.aspx">注册</a></li>
+                    <% }
+                    else
+                    { %>
+                    <li><a href="../navbar/"><%= Session["username"] %></a></li>
+                    <li><a href="?logout=true">退出</a></li>
+                    <% } %>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -57,7 +65,8 @@
                 <div class="col-lg-6 col-lg-offset-4 col-md-6 col-md-offset-4 col-sm-6 col-sm-offset-4">
                     <div class="input-group">
                         <input type="text" class="form-control input-md" placeholder="请输入。。。">
-                        <span class="input-group-btn"><button class="btn btn-default btn-md" type="button">搜索</button></span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-md" type="button">搜索</button></span>
                     </div>
                     <!-- /input-group -->
                 </div>
@@ -195,16 +204,10 @@
                             </div>
                             <div class="panel-body">
                                 <ul class="tag">
-                                    <li><a class="btn btn-default" href="#">12</a></li>
-                                    <li><a class="btn btn-default" href="#">234</a></li>
-                                    <li><a class="btn btn-default" href="#">6哈哈7</a></li>
-                                    <li><a class="btn btn-default" href="#">8</a></li>
-                                    <li><a class="btn btn-default" href="#">9</a></li>
-                                    <li><a class="btn btn-default" href="#">123</a></li>
-                                    <li><a class="btn btn-default" href="#">4剧情5</a></li>
-                                    <li><a class="btn btn-default" href="#">678</a></li>
-                                    <li><a class="btn btn-default" href="#">12</a></li>
-                                    <li><a class="btn btn-default" href="#">12</a></li>
+                                    <% foreach (moviesite.Tag tag in taglist)
+                                        { %>
+                                    <li><a class="btn btn-default" href="#"><%= tag.Name %></a></li>
+                                    <% } %>
                                 </ul>
                             </div>
                         </div>

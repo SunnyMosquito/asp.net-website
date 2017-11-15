@@ -239,4 +239,19 @@ namespace moviesite
             set { name = value; }
         }
     }
+    public class Tag { 
+        private int tagid;
+        public int Tagid
+        {
+            get { return tagid; }
+            set { tagid = value; }
+        }
+
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+    }
 }
