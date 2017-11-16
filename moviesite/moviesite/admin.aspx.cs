@@ -102,7 +102,7 @@ namespace moviesite
                 movie.MovieId = Convert.ToInt32(dr["id"]);
                 movie.Name = dr["name"].ToString();
                 movie.DateRelease = Convert.ToDateTime(dr["date_release"]);
-                movie.BoxOffice = dr["box_office"].ToString();
+                movie.BoxOffice = Convert.ToDouble(dr["box_office"]);
                 movie.Grade = Convert.ToDouble(dr["grade"]);
                 movieslist.Add(movie);
             }

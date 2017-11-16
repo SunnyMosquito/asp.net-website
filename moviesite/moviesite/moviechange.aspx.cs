@@ -13,14 +13,14 @@ namespace moviesite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["username"] == null)
-            {
-                Response.Redirect("~/login.aspx?next=" + HttpContext.Current.Request.Path);
-            }
-            if (!(Session["is_superuser"].ToString() == "true"))
-            {
-                Response.Redirect("~/index.aspx");
-            }
+            //if (Session["username"] == null)
+            //{
+            //    Response.Redirect("~/login.aspx?next=" + HttpContext.Current.Request.Path);
+            //}
+            //if (!(Session["is_superuser"].ToString() == "true"))
+            //{
+            //    Response.Redirect("~/index.aspx");
+            //}
             if (Request.QueryString["logout"] == "true")
             {
                 Session["username"] = null;
@@ -47,7 +47,7 @@ namespace moviesite
                 {
                     movie.IsRecommend = "false";
                 }
-                movie.BoxOffice = Request.Form["boxoffice"];
+                movie.BoxOffice = Convert.ToDouble(Request.Form["boxoffice"]);
                 movie.Grade = Convert.ToDouble(Request.Form["grade"]);
                 movie.Url = Request.Form["url"];
                 movie.Password = Request.Form["password"];
@@ -102,7 +102,7 @@ namespace moviesite
                 mymovie.Image = dr["image"].ToString();
                 mymovie.Summary = dr["summary"].ToString();
                 mymovie.IsRecommend = dr["is_recommend"].ToString().ToLower();
-                mymovie.BoxOffice = dr["box_office"].ToString();
+                mymovie.BoxOffice = Convert.ToDouble(dr["box_office"]);
                 mymovie.Grade = Convert.ToDouble(dr["grade"]);
                 mymovie.Url = dr["url"].ToString();
                 mymovie.Password = dr["password"].ToString();
@@ -139,7 +139,7 @@ namespace moviesite
                     {
                         movie.IsRecommend = "false";
                     }
-                    movie.BoxOffice = Request.Form["boxoffice"];
+                    movie.BoxOffice = Convert.ToDouble(Request.Form["boxoffice"]);
                     movie.Grade = Convert.ToDouble(Request.Form["grade"]);
                     movie.Url = Request.Form["url"];
                     movie.Password = Request.Form["password"];

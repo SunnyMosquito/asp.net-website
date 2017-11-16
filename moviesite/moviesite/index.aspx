@@ -47,8 +47,8 @@
                     <li><a href="/login.aspx">登录</a></li>
                     <li><a href="/login.aspx">注册</a></li>
                     <% }
-                    else
-                    { %>
+                        else
+                        { %>
                     <li><a href="../navbar/"><%= Session["username"] %></a></li>
                     <li><a href="?logout=true">退出</a></li>
                     <% } %>
@@ -114,38 +114,20 @@
                                 <h3 class="panel-title">最新推荐<span class="pull-right"><a href="#">more</a></span></h3>
                             </div>
                             <div class="panel-body">
+                                <% foreach (moviesite.Movie li in recommend_list)
+                                    { %>
                                 <a href="#" class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-3 col-xs-3">
                                             <img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9">
-                                            <h4>入门网站包</h4>
-                                            <p>以下实例包含了4个网格，但是我们在小设备浏用工具来解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下我解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下面实例所示：</p>
+                                            <h4><%= li.Name %></h4>
+                                            <p><%= li.Summary %></p>
                                         </div>
                                     </div>
                                 </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-3 col-xs-3">
-                                            <img src="img/40e656b461c4df046cc72ceb271bd74d.jpg" class="img-responsive" alt="">
-                                        </div>
-                                        <div class="col-md-9 col-sm-9 col-xs-9">
-                                            <h4>入门网站包</h4>
-                                            <p>栏目子栏目这么写的是，栏目和子栏目的字样都是靠底边对齐的，但是添加了pull-right之后：栏目子栏目栏目 是靠右边了，但是却往顶边对齐了。那么怎么才能让它往底边对</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-3 col-xs-3">
-                                            <img src="img/ce17edbce8482f7f4bfbe8f5dd9e3af4.jpg" class="img-responsive" alt="">
-                                        </div>
-                                        <div class="col-md-9 col-sm-9 col-xs-9">
-                                            <h4 class="list-group-item-heading">入门网站包</h4>
-                                        </div>
-                                    </div>
-                                </a>
+                                <% } %>
                             </div>
                         </div>
                     </div>
@@ -157,38 +139,21 @@
                                 <h3 class="panel-title">最多下载<span class="pull-right"><a href="#">more</a></span></h3>
                             </div>
                             <div class="panel-body">
+                                <% foreach (moviesite.Movie li in click_count_list)
+                                    { %>
                                 <a href="#" class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-3 col-xs-3">
                                             <img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9">
-                                            <h4>入门网站包</h4>
-                                            <p>以下实例包含了4个网格，但是我们在小设备浏用工具来解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下我解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下面实例所示：</p>
+                                            <h4><%= li.Name %></h4>
+                                            <p><%= li.Summary %></p>
+
                                         </div>
                                     </div>
                                 </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-3 col-xs-3">
-                                            <img src="img/40e656b461c4df046cc72ceb271bd74d.jpg" class="img-responsive" alt="">
-                                        </div>
-                                        <div class="col-md-9 col-sm-9 col-xs-9">
-                                            <h4>入门网站包</h4>
-                                            <p>栏目子栏目这么写的是，栏目和子栏目的字样都是靠底边对齐的，但是添加了pull-right之后：栏目子栏目栏目 是靠右边了，但是却往顶边对齐了。那么怎么才能让它往底边对</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-3 col-xs-3">
-                                            <img src="img/ce17edbce8482f7f4bfbe8f5dd9e3af4.jpg" class="img-responsive" alt="">
-                                        </div>
-                                        <div class="col-md-9 col-sm-9 col-xs-9">
-                                            <h4 class="list-group-item-heading">入门网站包</h4>
-                                        </div>
-                                    </div>
-                                </a>
+                                <% } %>
                             </div>
                         </div>
                     </div>
@@ -216,24 +181,13 @@
                                 <h3 class="panel-title">最高票房</h3>
                             </div>
                             <div class="panel-body">
-                                <a class="list-group-item text-nowrap">免费域名注册</a>
-                                <a class="list-group-item text-nowrap">免费 Window 空间托管</a>
-                                <a class="list-group-item text-nowrap">图像的数图像的数量图像的数量图像的数量图像的数量图像的数量量</a>
+                                <% foreach (moviesite.Movie li in box_office_list)
+                                    { %>
+
                                 <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 24*7 支持
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
+                                    <% if (li.IsRecommend.ToLower() == "true")
+                                        { %><span class="badge">推荐</span><% } %><%= li.Name %></a>
+                                <% } %>
                             </div>
                         </div>
                         <div class="panel panel-default">
@@ -241,24 +195,11 @@
                                 <h3 class="panel-title">最高评论</h3>
                             </div>
                             <div class="panel-body">
-                                <a class="list-group-item text-nowrap">免费域名注册</a>
-                                <a class="list-group-item text-nowrap">免费 Window 空间托管</a>
-                                <a class="list-group-item text-nowrap">图像的数图像的数量图像的数量图像的数量图像的数量图像的数量量</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 24*7 支持
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
+                                <% foreach (moviesite.Movie li in comment_list)
+                                    { %>
+                                <a class="list-group-item text-nowrap"><span class="badge"><%= li.CommentCount %></span>
+                                    <%= li.Name %></a>
+                                <% } %>
                             </div>
                         </div>
                         <!-- end pannel -->

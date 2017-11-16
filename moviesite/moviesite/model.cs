@@ -141,8 +141,8 @@ namespace moviesite
             get { return clickcount; }
             set { clickcount = value; }
         }
-        private string boxoffice;
-        public string BoxOffice
+        private double boxoffice;
+        public double BoxOffice
         {
             get { return boxoffice; }
             set { boxoffice = value; }
@@ -220,6 +220,12 @@ namespace moviesite
         {
             get { return category_id; }
             set { category_id = value; }
+        }
+        private int comment_count;
+        public int CommentCount
+        {
+            get { return comment_count; }
+            set { comment_count = value; }
         }
     }
 
