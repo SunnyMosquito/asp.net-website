@@ -5,42 +5,47 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Configuration;
+using System.Data.SQLite;
 namespace moviesite
 {
-    public partial class index : System.Web.UI.Page
+    public partial class tag : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["logout"] == "true")
+            //if (Request.QueryString["id"] != null)
+            //{
+            //    string[] idlist = Request.QueryString["id"].Split(',');
+            //    string sql = "select movie.* from movie,movie__tag,tag where movie.id=movie__tag.movie_id and tag.id=movie__tag.tag_id";
+            //    for (int i = 0; i < idlist.Length; i++)
+            //    {
+            //        sql += " and movie__tag.tag_id=" + idlist[i];
+            //    }
+            //    sql += " group by movie__tag.movie_id";
+            //    MovieList = GetMovie_list(sql);
+            //    Response.Write(sql);
+            //}
+            if (Request.QueryString["id"] != null)
             {
-                Session["username"] = null;
-                Session["is_superuser"] = null;
-                Session["userid"] = null;
-                Response.Redirect("login.aspx");
+                string[] idlist = Request.QueryString["id"].Split(',');
+                string sql = "SELECT m.*,GROUP_CONCAT(mt.tag_id) FROM movie as m JOIN movie__tag as mt ON m.id = mt.movie_id WHERE mt.tag_id IN(";
+                for (int i = 0; i < idlist.Length; i++)
+                {
+                    if (i == idlist.Length - 1)
+                    {
+                        sql += idlist[i];
+                    }
+                    else
+                    {
+                        sql += idlist[i] + ",";
+                    }
+                }
+                sql += ") GROUP BY m.id HAVING COUNT(DISTINCT mt.tag_id) ="+idlist.Length;
+                MovieList = GetMovie_list(sql);
             }
-            //select movie.*,count(movie__tag.movie_id) from movie,movie__tag,tag where movie.id=movie__tag.movie_id and tag.id=movie__tag.tag_id group by movie__tag.movie_id;
-        }
-        public List<Category> category
-        {
-            get
+            else
             {
-                return GetCategory();
+                Response.Redirect("index.aspx");
             }
-        }
-        private List<Category> GetCategory()
-        {
-            List<Category> list = new List<Category>();
-            string sql = string.Format("select * from category");
-            DataSet ds = SQLiteHelper.Query(sql);
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                Category li = new Category();
-                li.Categoryid = Convert.ToInt32(dr["id"]);
-                li.Name = dr["name"].ToString();
-                list.Add(li);
-            }
-            return list;
         }
         public List<Tag> taglist
         {
@@ -62,22 +67,6 @@ namespace moviesite
                 list.Add(li);
             }
             return list;
-        }
-        public List<Movie> recommend_list
-        {
-            get
-            {
-                string sql = string.Format("select * from Movie where is_recommend='true' order by date_upload limit 0,5");
-                return GetMovie_list(sql);
-            }
-        }
-        public List<Movie> click_count_list
-        {
-            get
-            {
-                string sql = string.Format("select * from Movie order by click_count desc limit 0,5");
-                return GetMovie_list(sql);
-            }
         }
         public List<Movie> box_office_list
         {
@@ -127,6 +116,68 @@ namespace moviesite
         {
             List<Movie> list = new List<Movie>();
             DataSet ds = SQLiteHelper.Query(sql);
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                Movie li = new Movie();
+                li.Name = dr["name"].ToString();
+                li.Image = dr["image"].ToString();
+                li.Summary = dr["summary"].ToString();
+                li.IsRecommend = dr["is_recommend"].ToString().ToLower();
+                li.BoxOffice = Convert.ToDouble(dr["box_office"]);
+                li.Grade = Convert.ToDouble(dr["grade"]);
+                li.Url = dr["url"].ToString();
+                li.Password = dr["password"].ToString();
+                li.Type = dr["type"].ToString();
+                li.Duration = Convert.ToInt32(dr["duration"]);
+                li.Director = dr["director"].ToString();
+                li.Scriptwriter = dr["scriptwriter"].ToString();
+                li.Actor = dr["actor"].ToString();
+                li.DateRelease = Convert.ToDateTime(dr["date_release"]);
+                li.Language = dr["language"].ToString();
+                li.CategoryId = Convert.ToInt32(dr["category_id"]);
+                list.Add(li);
+            }
+            return list;
+        }
+        public List<Category> category
+        {
+            get
+            {
+                return GetCategory();
+            }
+        }
+        private List<Category> GetCategory()
+        {
+            List<Category> list = new List<Category>();
+            string sql = string.Format("select * from category");
+            DataSet ds = SQLiteHelper.Query(sql);
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                Category li = new Category();
+                li.Categoryid = Convert.ToInt32(dr["id"]);
+                li.Name = dr["name"].ToString();
+                list.Add(li);
+            }
+            return list;
+        }
+        public List<Movie> MovieList;
+        public bool IsContain(string id)
+        {
+            string[] flag= Request.QueryString["id"].Split(',');
+            List<string> list = new List<string>(flag);
+            if (list.Contains(id))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private List<Movie> GetMovie_list(string sql,SQLiteParameter[] sps)
+        {
+            List<Movie> list = new List<Movie>();
+            DataSet ds = SQLiteHelper.Query(sql,sps);
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
                 Movie li = new Movie();

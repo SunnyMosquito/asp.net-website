@@ -161,3 +161,14 @@ insert into comment(content,date_publish,movie_id,user_id,pid_id) values('c','20
 insert into comment(content,date_publish,movie_id,user_id,pid_id) values('d','2017-10-13',2,3,0);
 insert into comment(content,date_publish,movie_id,user_id,pid_id) values('e','2017-10-14',1,1,0);
 insert into comment(content,date_publish,movie_id,user_id,pid_id) values('f','2017-10-15',5,1,0);
+
+
+
+
+
+
+SELECT m.id,m.name,GROUP_CONCAT(mt.tag_id)
+ FROM movie as m JOIN movie__tag as mt ON m.id = mt.movie_id
+  WHERE mt.tag_id IN (2,4) GROUP BY m.id
+   HAVING COUNT(DISTINCT mt.tag_id) > 1
+  

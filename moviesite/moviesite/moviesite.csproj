@@ -138,6 +138,8 @@
     <Content Include="js\validator.js" />
     <Content Include="login.aspx" />
     <Content Include="moviechange.aspx" />
+    <Content Include="register.aspx" />
+    <Content Include="tag.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -180,7 +182,21 @@
       <DependentUpon>moviechange.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="register.aspx.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="register.aspx.designer.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SQLiteHlper.cs" />
+    <Compile Include="tag.aspx.cs">
+      <DependentUpon>tag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tag.aspx.designer.cs">
+      <DependentUpon>tag.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
