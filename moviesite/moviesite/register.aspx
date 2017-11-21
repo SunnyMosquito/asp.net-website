@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="moviesite.register" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -56,7 +56,7 @@
             <div class="col-md-3 col-sm-2 col-xs-1 column">
             </div>
             <div class="col-md-6 col-sm-8 col-xs-10 column">
-                <form role="form">
+                <form role="form" action="<%= Request.Url %>" method="post" enctype="multipart/form-data" >
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" name="email" class="form-control" id="exampleInputEmail1" />
@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">头像</label>
-                        <input type="file" id="exampleInputFile" />
+                        <input type="file" id="exampleInputFile" name="avatar"/>
                         <p class="help-block">
                             请选择你的头像。。。
                         </p>

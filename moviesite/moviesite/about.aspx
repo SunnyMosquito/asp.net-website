@@ -1,15 +1,15 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="about.aspx.cs" Inherits="moviesite.about" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>注册</title>
+    <title>电影资源下载</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.css">
     <style>
-
     </style>
 </head>
 
@@ -24,31 +24,41 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">拉普达</a>
+                <a class="navbar-brand" href="/">拉普达</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li class="active"><a href="about.aspx">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">剧情</a></li>
-                            <li><a href="#">动作</a></li>
-                            <li><a href="#">爱情</a></li>
+                            <% foreach (moviesite.Category cate in moviesite.CategoryControl.GetCategory())
+                                { %>
+                            <li><a href="#"><%= cate.Name %></a></li>
+                            <% } %>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/">登录</a></li>
-                    <li><a href="../navbar-static-top/">注册</a></li>
+                    <% if (Session["username"] == null)
+                        { %>
+                    <li><a href="login.aspx">登录</a></li>
+                    <li><a href="register.aspx">注册</a></li>
+                    <% }
+                        else
+                        { %>
+                    <li><a href="../navbar/"><%= Session["username"] %></a></li>
+                    <li><a href="?logout=true">退出</a></li>
+                    <% } %>
                 </ul>
             </div>
             <!--/.nav-collapse -->
         </div>
     </nav>
     <!-- Fixed navbar -->
+
     <div class="container bottom-50 top-50">
         <div class="row">
             <div class="col-md-2 ">
@@ -75,17 +85,17 @@
             <div class="col-md-2"></div>
         </div>
     </div>
+
+
     <!-- footer -->
     <footer class="container-fluid" style="background-color: #e7e7e7;">
-    	<p align="center" class="top">
+        <p align="center" class="top">
             Copyright &copy;2015 Dreyer
         </p>
     </footer>
     <!-- end footer -->
     <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/bootstrapValidator.js"></script>
-    <script type="text/javascript" src="js/validator.js"></script>
 </body>
 
 </html>

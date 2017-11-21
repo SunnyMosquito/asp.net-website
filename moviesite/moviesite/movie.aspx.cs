@@ -5,43 +5,23 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Configuration;
 namespace moviesite
 {
-    public partial class index : System.Web.UI.Page
+    public partial class movie : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["logout"] == "true")
+            if (Request.QueryString["id"] != null)
             {
-                Session["username"] = null;
-                Session["is_superuser"] = null;
-                Session["userid"] = null;
-                Response.Redirect("login.aspx");
+                string sql = string.Format("select * from movie where id={0}", Request.QueryString["id"]);
+                mymovie = moviesite.MovieControl.GetMovie(sql);
             }
-            //select movie.*,count(movie__tag.movie_id) from movie,movie__tag,tag where movie.id=movie__tag.movie_id and tag.id=movie__tag.tag_id group by movie__tag.movie_id;
-        }
-        public List<Category> category
-        {
-            get
+            else
             {
-                return GetCategory();
+                Response.Redirect("/");
             }
         }
-        private List<Category> GetCategory()
-        {
-            List<Category> list = new List<Category>();
-            string sql = string.Format("select * from category");
-            DataSet ds = SQLiteHelper.Query(sql);
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                Category li = new Category();
-                li.Categoryid = Convert.ToInt32(dr["id"]);
-                li.Name = dr["name"].ToString();
-                list.Add(li);
-            }
-            return list;
-        }
+        public Movie mymovie;
         public List<Tag> taglist
         {
             get
@@ -130,7 +110,7 @@ namespace moviesite
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
                 Movie li = new Movie();
-                li.MovieId =Convert.ToInt32(dr["id"]);
+                li.MovieId = Convert.ToInt32(dr["id"]);
                 li.Name = dr["name"].ToString();
                 li.Image = dr["image"].ToString();
                 li.Summary = dr["summary"].ToString();

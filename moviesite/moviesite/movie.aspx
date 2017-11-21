@@ -1,3 +1,5 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="movie.aspx.cs" Inherits="moviesite.movie" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,8 +42,8 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/">登录</a></li>
-                    <li><a href="../navbar-static-top/">注册</a></li>
+                    <li><a href="login.aspx">登录</a></li>
+                    <li><a href="register.aspx">注册</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -62,38 +64,38 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">天才枪手</h3>
+                                <h3 class="panel-title"><%= mymovie.Name %></h3>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-4"><img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive"></div>
                                     <div class="col-md-8">
                                         <div id="info">
-                                            <span>导演:<span>戴安娜·普林斯/戴安娜·普林斯/戴安娜·普林斯/戴安娜·普林斯/戴安娜·普林斯</span></span>
+                                            <span>导演:<span><%= mymovie.Director %></span></span>
                                             <br>
                                             <br>
-                                            <span>编剧</span>
+                                            <span>编剧:<span><%= mymovie.Scriptwriter %></span></span>
                                             <br>
                                             <br>
-                                            <span>演员</span>
+                                            <span>演员:<span><%= mymovie.Actor %></span></span>
                                             <br>
                                             <br>
-                                            <span>类型</span>
+                                            <span>类型<span>:<%= mymovie.Type %></span></span>
                                             <br>
                                             <br>
-                                            <span>语言</span>
+                                            <span>语言:<span><%= mymovie.Language %></span></span>
                                             <br>
                                             <br>
-                                            <span>片长</span>
+                                            <span>片长:<span><%= mymovie.Duration %></span></span>
                                             <br>
                                             <br>
-                                            <span>票房</span>
+                                            <span>票房:<span><%= mymovie.BoxOffice %></span></span>
                                             <br>
                                             <br>
-                                            <span>上映时间</span>
+                                            <span>上映时间:<span><%= mymovie.DateRelease %></span></span>
                                             <br>
                                             <br>
-                                            <span>上传时间</span>
+                                            <span>上传时间:<span><%= mymovie.DateUpload %></span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -101,11 +103,12 @@
                                     <div class="col-md-2"></div>
                                     <div class="col-md-8">
                                         <h3>简介</h3>
-                                        <p>受到超人无私奉献的影响，蝙蝠侠重燃了对人类的信心，接受了新盟友——神奇女侠（戴安娜·普林斯）的帮助，去对抗更加强大的敌人。蝙蝠侠和神奇女侠一同寻找并招募了一支超人类联盟来抵挡新觉醒的威胁。但尽管这支队伍集结了超人、蝙蝠侠、神奇女侠、闪电侠、海王和钢骨等人，他们似乎无法阻止敌人对地球的进攻……
+                                        <p>
+                                            <%= mymovie.Summary %>
                                         </p>
                                         <div class="url top-50">
-                                            <h5>观看链接：</h5><a href="about.html">http://www.baidu.com</a>
-                                            <h5>密码：</h5>123456
+                                            <h5>观看链接：</h5><a href="<%= mymovie.Url %>"><%= mymovie.Url %></a>
+                                            <h5>密码：</h5><%= mymovie.Password %>
                                         </div>
                                         <div class="comment top-50 bottom-50">
                                             <h5>评论</h5>
@@ -140,16 +143,10 @@
                             </div>
                             <div class="panel-body">
                                 <ul class="tag">
-                                    <li><a class="btn btn-default" href="#">12</a></li>
-                                    <li><a class="btn btn-default" href="#">234</a></li>
-                                    <li><a class="btn btn-default" href="#">6哈哈7</a></li>
-                                    <li><a class="btn btn-default" href="#">8</a></li>
-                                    <li><a class="btn btn-default" href="#">9</a></li>
-                                    <li><a class="btn btn-default" href="#">123</a></li>
-                                    <li><a class="btn btn-default" href="#">4剧情5</a></li>
-                                    <li><a class="btn btn-default" href="#">678</a></li>
-                                    <li><a class="btn btn-default" href="#">12</a></li>
-                                    <li><a class="btn btn-default" href="#">12</a></li>
+                                    <% foreach (moviesite.Tag tag in taglist)
+                                        { %>
+                                    <li><a class="btn btn-default" href="tag.aspx?id=<%= tag.Tagid %>"><%= tag.Name %></a></li>
+                                    <% } %>
                                 </ul>
                             </div>
                         </div>
@@ -158,49 +155,25 @@
                                 <h3 class="panel-title">最高票房</h3>
                             </div>
                             <div class="panel-body">
-                                <a class="list-group-item text-nowrap">免费域名注册</a>
-                                <a class="list-group-item text-nowrap">免费 Window 空间托管</a>
-                                <a class="list-group-item text-nowrap">图像的数图像的数量图像的数量图像的数量图像的数量图像的数量量</a>
+                                <% foreach (moviesite.Movie li in box_office_list)
+                                    { %>
+
                                 <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 24*7 支持
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
+                                    <% if (li.IsRecommend.ToLower() == "true")
+                                        { %><span class="badge">推荐</span><% } %><%= li.Name %></a>
+                                <% } %>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">最高评论</h3>
+                                <h3 class="panel-title">最多评论</h3>
                             </div>
                             <div class="panel-body">
-                                <a class="list-group-item text-nowrap">免费域名注册</a>
-                                <a class="list-group-item text-nowrap">免费 Window 空间托管</a>
-                                <a class="list-group-item text-nowrap">图像的数图像的数量图像的数量图像的数量图像的数量图像的数量量</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 24*7 支持
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
-                                <a class="list-group-item text-nowrap">每年更新成本</a>
-                                <a class="list-group-item text-nowrap">
-                                    <span class="badge">新</span> 折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠折扣优惠
-                                </a>
+                                <% foreach (moviesite.Movie li in comment_list)
+                                    { %>
+                                <a class="list-group-item text-nowrap"><span class="badge"><%= li.CommentCount %></span>
+                                    <%= li.Name %></a>
+                                <% } %>
                             </div>
                         </div>
                         <!-- end pannel -->
@@ -229,55 +202,6 @@
     <!-- end container  -->
     <!-- footer -->
     <footer class="container-fluid" style="background-color: #e7e7e7;">
-        <!--采用container，使得页尾内容居中 -->
-        <div class="container hidden-xs hidden-sm">
-            <div class="row">
-                <div class="row-content col-lg-2 col-md-2"></div>
-                <div class="row-content col-lg-2 col-md-2">
-                    <h3>Subscribe</h3>
-                    <ul>
-                        <li><a href="#">Newsletter</a></li>
-                        <li><a href="#">RSS feed</a></li>
-                        <li><a href="#">RSS to Email</a></li>
-                        <li><a href="#">Product Hunt</a></li>
-                        <li><a href="#">Twitter</a></li>
-                    </ul>
-                </div>
-                <div class="row-content col-lg-2 col-md-2">
-                    <h3>BROWSE</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Gallery</a></li>
-                        <li><a href="#">Templates</a></li>
-                        <li><a href="#">Resources</a></li>
-                        <li><a href="#">OPL Themes</a></li>
-                    </ul>
-                </div>
-                <div class="row-content col-lg-2 col-md-2">
-                    <h3>INFORMA</h3>
-                    <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Why One Page?</a></li>
-                        <li><a href="#">OPL Blog</a></li>
-                        <li><a href="#">Product Hunt</a></li>
-                        <li><a href="#">Advertise</a></li>
-                    </ul>
-                </div>
-                <div class="row-content col-lg-2 col-md-2">
-                    <h3>RESOURCES</h3>
-                    <ul>
-                        <li><a href="#">Browse All</a></li>
-                        <li><a href="#">Design</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Hosting</a></li>
-                        <li><a href="#">Round Ups</a></li>
-                    </ul>
-                </div>
-                <div class="row-content col-lg-2 col-md-2"></div>
-            </div>
-            <!--/.row -->
-        </div>
-        <!--/.container-->
         <p align="center" class="top">
             Copyright &copy;2015 Dreyer
         </p>
