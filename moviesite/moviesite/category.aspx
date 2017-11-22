@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="tag.aspx.cs" Inherits="moviesite.tag" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="category.aspx.cs" Inherits="moviesite.category" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,15 +29,15 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="about.aspx">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <% foreach (moviesite.Category cate in moviesite.PublicService.GetCategory_List())
+                            <% foreach (moviesite.Category cate in categorylist)
                                 { %>
-                            <li><a href="#"><%= cate.Name %></a></li>
+                            <li><a href="category.aspx?id=<%= cate.Categoryid %>"><%= cate.Name %></a></li>
                             <% } %>
                         </ul>
                     </li>
@@ -65,34 +65,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">全部电影</h3>
-                            </div>
-                            <div class="panel-body">
-                                <ul class="tag">
-                                <% foreach (moviesite.Tag tag in moviesite.PublicService.GetTag_List())
-                                        { %>
-                                    <li><a href="
-                                        <% if (HttpContext.Current.Request.Url.Query != "")
-                                            {%>
-                                        <%= Request.Url %>,<%= tag.Tagid %>
-                                        <% } %><% else
-                                            { %>
-                                        <%= Request.Url %>?id=<%= tag.Tagid %>
-                                        <% } %>
-                                        " class="btn btn-default <% if (IsContain(tag.Tagid.ToString()))
-                                            { %>disabled<% } %>
-                                        "><%= tag.Name %></a></li>
-                                    <% } %>
-                                    </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row top">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">最新推荐</h3>
+                                <h3 class="panel-title">电影</h3>
                             </div>
                             <div class="panel-body">
                                 <% foreach (moviesite.Movie li in MovieList)
@@ -138,10 +111,9 @@
                             </div>
                             <div class="panel-body">
                                 <ul class="tag">
-                                    <% foreach (moviesite.Tag tag in moviesite.PublicService.GetTag_List())
+                                    <% foreach (moviesite.Tag tag in taglist)
                                         { %>
-                                    <li><a class="btn btn-default <% if (IsContain(tag.Tagid.ToString()))
-                                            { %>disabled<% } %>" href="tag.aspx?id=<%= tag.Tagid %>"><%= tag.Name %></a></li>
+                                    <li><a class="btn btn-default" href="tag.aspx?id=<%= tag.Tagid %>"><%= tag.Name %></a></li>
                                     <% } %>
                                 </ul>
                             </div>
@@ -151,7 +123,7 @@
                                 <h3 class="panel-title">最高票房</h3>
                             </div>
                             <div class="panel-body">
-                                <% foreach (moviesite.Movie li in moviesite.PublicService.GetMovie_BoxOffice_List())
+                                <% foreach (moviesite.Movie li in box_office_list)
                                     { %>
 
                                 <a class="list-group-item text-nowrap"  href="movie.aspx?id=<%= li.MovieId %>">
@@ -165,7 +137,7 @@
                                 <h3 class="panel-title">最高评论</h3>
                             </div>
                             <div class="panel-body">
-                                <% foreach (moviesite.Movie li in moviesite.PublicService.GetMovie_Comment_List())
+                                <% foreach (moviesite.Movie li in comment_list)
                                     { %>
                                 <a class="list-group-item text-nowrap"  href="movie.aspx?id=<%= li.MovieId %>"><span class="badge"><%= li.CommentCount %></span>
                                     <%= li.Name %></a>

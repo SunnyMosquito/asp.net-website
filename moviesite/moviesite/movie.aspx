@@ -143,7 +143,7 @@
                             </div>
                             <div class="panel-body">
                                 <ul class="tag">
-                                    <% foreach (moviesite.Tag tag in taglist)
+                                    <% foreach (moviesite.Tag tag in moviesite.PublicService.GetTag_List())
                                         { %>
                                     <li><a class="btn btn-default" href="tag.aspx?id=<%= tag.Tagid %>"><%= tag.Name %></a></li>
                                     <% } %>
@@ -155,10 +155,10 @@
                                 <h3 class="panel-title">最高票房</h3>
                             </div>
                             <div class="panel-body">
-                                <% foreach (moviesite.Movie li in box_office_list)
+                                <% foreach (moviesite.Movie li in moviesite.PublicService.GetMovie_BoxOffice_List())
                                     { %>
 
-                                <a class="list-group-item text-nowrap">
+                                <a class="list-group-item text-nowrap" href="movie.aspx?id=<%= li.MovieId %>">
                                     <% if (li.IsRecommend.ToLower() == "true")
                                         { %><span class="badge">推荐</span><% } %><%= li.Name %></a>
                                 <% } %>
@@ -169,9 +169,9 @@
                                 <h3 class="panel-title">最多评论</h3>
                             </div>
                             <div class="panel-body">
-                                <% foreach (moviesite.Movie li in comment_list)
+                                <% foreach (moviesite.Movie li in moviesite.PublicService.GetMovie_Comment_List())
                                     { %>
-                                <a class="list-group-item text-nowrap"><span class="badge"><%= li.CommentCount %></span>
+                                <a class="list-group-item text-nowrap" href="movie.aspx?id=<%= li.MovieId %>"><span class="badge"><%= li.CommentCount %></span>
                                     <%= li.Name %></a>
                                 <% } %>
                             </div>

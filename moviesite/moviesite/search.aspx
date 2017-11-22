@@ -1,16 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="tag.aspx.cs" Inherits="moviesite.tag" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="search.aspx.cs" Inherits="moviesite.search" %>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>电影资源下载</title>
+    <title>拉普达电影资源分享</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
-
     </style>
 </head>
 
@@ -25,39 +24,55 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">拉普达</a>
+                <a class="navbar-brand" href="<%# HttpContext.Current.Request.Url.Host %>">拉普达</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="about.aspx">About</a></li>
+                    <li><a href="contact.aspx">Contact</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <% foreach (moviesite.Category cate in moviesite.PublicService.GetCategory_List())
                                 { %>
-                            <li><a href="#"><%= cate.Name %></a></li>
+                            <li><a href="category.aspx?id=<%= cate.Categoryid %>"><%= cate.Name %></a></li>
                             <% } %>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.aspx">登录</a></li>
-                    <li><a href="register.aspx">注册</a></li>
+                    <% if (Session["username"] == null)
+                        { %>
+                    <li><a href="/login.aspx">登录</a></li>
+                    <li><a href="/login.aspx">注册</a></li>
+                    <% }
+                        else
+                        { %>
+                    <li><a href="../navbar/"><%= Session["username"] %></a></li>
+                    <li><a href="?logout=true">退出</a></li>
+                    <% } %>
                 </ul>
             </div>
             <!--/.nav-collapse -->
         </div>
     </nav>
     <!-- Fixed navbar -->
-    <div class="container" style="min-height:600px;">
-        <form class="form-inline" role="search" align="center">
-            <br>
-            <div class="input-group">
-                <input type="text" class="form-control input-md" placeholder="请输入。。。">
-                <span class="input-group-btn"><button class="btn btn-default btn-md" type="button">搜索</button></span>
+    <div class="container">
+        <form class="form-inline" role="search">
+            <div class="row">
+                <br>
+                <div class="col-lg-6 col-lg-offset-4 col-md-6 col-md-offset-4 col-sm-6 col-sm-offset-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-md" placeholder="请输入。。。">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-md" type="button">搜索</button></span>
+                    </div>
+                    <!-- /input-group -->
+                </div>
+                <!-- /.col-lg-6 -->
             </div>
+            <!-- /.row -->
         </form>
         <div class="row">
             <div class="col-xs-12 col-md-8">
@@ -65,66 +80,39 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">全部电影</h3>
+                                <h3 class="panel-title">最新推荐<span class="pull-right"><a href="#">more</a></span></h3>
                             </div>
                             <div class="panel-body">
-                                <ul class="tag">
-                                <% foreach (moviesite.Tag tag in moviesite.PublicService.GetTag_List())
-                                        { %>
-                                    <li><a href="
-                                        <% if (HttpContext.Current.Request.Url.Query != "")
-                                            {%>
-                                        <%= Request.Url %>,<%= tag.Tagid %>
-                                        <% } %><% else
-                                            { %>
-                                        <%= Request.Url %>?id=<%= tag.Tagid %>
-                                        <% } %>
-                                        " class="btn btn-default <% if (IsContain(tag.Tagid.ToString()))
-                                            { %>disabled<% } %>
-                                        "><%= tag.Name %></a></li>
-                                    <% } %>
-                                    </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row top">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">最新推荐</h3>
-                            </div>
-                            <div class="panel-body">
-                                <% foreach (moviesite.Movie li in MovieList)
-                                    { %>
                                 <a href="#" class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-3 col-xs-3">
                                             <img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9">
-                                            <h4><%= li.Name %></h4>
+                                            <h4>入门网站包</h4>
                                             <p>以下实例包含了4个网格，但是我们在小设备浏用工具来解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下我解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下面实例所示：</p>
                                         </div>
                                     </div>
                                 </a>
+                                <% if (SearchMovie_List != null)
+                                    { %>
+                                    <% foreach (moviesite.Movie li in SearchMovie_List)
+                                        { %>
+                                    <a href="movie.aspx?id=<%= li.MovieId %>" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive" alt="">
+                                            </div>
+                                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                                <h4><%= li.Name %></h4>
+                                                <p><%= li.Summary %></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <% } %>
                                 <% } %>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-7 "></div>
-                    <div class="col-md-5 " align="center">
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -140,8 +128,7 @@
                                 <ul class="tag">
                                     <% foreach (moviesite.Tag tag in moviesite.PublicService.GetTag_List())
                                         { %>
-                                    <li><a class="btn btn-default <% if (IsContain(tag.Tagid.ToString()))
-                                            { %>disabled<% } %>" href="tag.aspx?id=<%= tag.Tagid %>"><%= tag.Name %></a></li>
+                                    <li><a class="btn btn-default" href="tag.aspx?id=<%= tag.Tagid %>"><%= tag.Name %></a></li>
                                     <% } %>
                                 </ul>
                             </div>
@@ -154,7 +141,7 @@
                                 <% foreach (moviesite.Movie li in moviesite.PublicService.GetMovie_BoxOffice_List())
                                     { %>
 
-                                <a class="list-group-item text-nowrap"  href="movie.aspx?id=<%= li.MovieId %>">
+                                <a class="list-group-item text-nowrap" href="movie.aspx?id=<%= li.MovieId %>">
                                     <% if (li.IsRecommend.ToLower() == "true")
                                         { %><span class="badge">推荐</span><% } %><%= li.Name %></a>
                                 <% } %>
@@ -167,7 +154,7 @@
                             <div class="panel-body">
                                 <% foreach (moviesite.Movie li in moviesite.PublicService.GetMovie_Comment_List())
                                     { %>
-                                <a class="list-group-item text-nowrap"  href="movie.aspx?id=<%= li.MovieId %>"><span class="badge"><%= li.CommentCount %></span>
+                                <a class="list-group-item text-nowrap" href="movie.aspx?id=<%= li.MovieId %>"><span class="badge"><%= li.CommentCount %></span>
                                     <%= li.Name %></a>
                                 <% } %>
                             </div>
@@ -208,3 +195,4 @@
 </body>
 
 </html>
+

@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>电影资源下载</title>
+    <title>拉普达电影资源分享</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -28,15 +28,15 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="/">Home</a></li>
                     <li><a href="about.aspx">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="contact.aspx">Contact</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <% foreach (moviesite.Category cate in category)
+                            <% foreach (moviesite.Category cate in moviesite.PublicService.GetCategory_List())
                                 { %>
-                            <li><a href="#"><%= cate.Name %></a></li>
+                            <li><a href="category.aspx?id=<%= cate.Categoryid %>"><%= cate.Name %></a></li>
                             <% } %>
                         </ul>
                     </li>
@@ -59,14 +59,14 @@
     </nav>
     <!-- Fixed navbar -->
     <div class="container">
-        <form class="form-inline" role="search">
+        <form class="form-inline" role="search" action="search.aspx" method="post" >
             <div class="row">
                 <br>
                 <div class="col-lg-6 col-lg-offset-4 col-md-6 col-md-offset-4 col-sm-6 col-sm-offset-4">
                     <div class="input-group">
-                        <input type="text" class="form-control input-md" placeholder="请输入。。。">
+                        <input type="text" class="form-control input-md" placeholder="请输入。。。" name="keyword">
                         <span class="input-group-btn">
-                            <button class="btn btn-default btn-md" type="button">搜索</button></span>
+                            <button class="btn btn-default btn-md" type="submit">搜索</button></span>
                     </div>
                     <!-- /input-group -->
                 </div>
@@ -114,7 +114,7 @@
                                 <h3 class="panel-title">最新推荐<span class="pull-right"><a href="#">more</a></span></h3>
                             </div>
                             <div class="panel-body">
-                                <% foreach (moviesite.Movie li in recommend_list)
+                                <% foreach (moviesite.Movie li in Recommend_list)
                                     { %>
                                 <a href="movie.aspx?id=<%= li.MovieId %>" class="list-group-item">
                                     <div class="row">
@@ -139,9 +139,9 @@
                                 <h3 class="panel-title">最多下载<span class="pull-right"><a href="#">more</a></span></h3>
                             </div>
                             <div class="panel-body">
-                                <% foreach (moviesite.Movie li in click_count_list)
+                                <% foreach (moviesite.Movie li in Click_count_list)
                                     { %>
-                                <a href="#" class="list-group-item">
+                                <a href="movie.aspx?id=<%= li.MovieId %>" class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-3 col-xs-3">
                                             <img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive" alt="">
@@ -168,7 +168,7 @@
                             </div>
                             <div class="panel-body">
                                 <ul class="tag">
-                                    <% foreach (moviesite.Tag tag in taglist)
+                                    <% foreach (moviesite.Tag tag in moviesite.PublicService.GetTag_List())
                                         { %>
                                     <li><a class="btn btn-default" href="tag.aspx?id=<%= tag.Tagid %>"><%= tag.Name %></a></li>
                                     <% } %>
@@ -180,10 +180,10 @@
                                 <h3 class="panel-title">最高票房</h3>
                             </div>
                             <div class="panel-body">
-                                <% foreach (moviesite.Movie li in box_office_list)
+                                <% foreach (moviesite.Movie li in moviesite.PublicService.GetMovie_BoxOffice_List())
                                     { %>
 
-                                <a class="list-group-item text-nowrap">
+                                <a class="list-group-item text-nowrap" href="movie.aspx?id=<%= li.MovieId %>">
                                     <% if (li.IsRecommend.ToLower() == "true")
                                         { %><span class="badge">推荐</span><% } %><%= li.Name %></a>
                                 <% } %>
@@ -194,9 +194,9 @@
                                 <h3 class="panel-title">最高评论</h3>
                             </div>
                             <div class="panel-body">
-                                <% foreach (moviesite.Movie li in comment_list)
+                                <% foreach (moviesite.Movie li in moviesite.PublicService.GetMovie_Comment_List())
                                     { %>
-                                <a class="list-group-item text-nowrap"><span class="badge"><%= li.CommentCount %></span>
+                                <a class="list-group-item text-nowrap" href="movie.aspx?id=<%= li.MovieId %>"><span class="badge"><%= li.CommentCount %></span>
                                     <%= li.Name %></a>
                                 <% } %>
                             </div>

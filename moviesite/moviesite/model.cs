@@ -264,86 +264,86 @@ namespace moviesite
         }
     }
 
-    public class MovieControl
-    {
-        public static List<Movie> GetAllMovieList
-        {
-            get
-            {
-                string sql = "select * from movie";
-                return GetMovie_list(sql);
-            }
-        }
-        public static List<Movie> GetMovie_list(string sql)
-        {
-            List<Movie> list = new List<Movie>();
-            DataSet ds = SQLiteHelper.Query(sql);
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                Movie li = new Movie();
-                li.MovieId = Convert.ToInt32(dr["id"]);
-                li.Name = dr["name"].ToString();
-                li.Image = dr["image"].ToString();
-                li.Summary = dr["summary"].ToString();
-                li.IsRecommend = dr["is_recommend"].ToString().ToLower();
-                li.BoxOffice = Convert.ToDouble(dr["box_office"]);
-                li.Grade = Convert.ToDouble(dr["grade"]);
-                li.Url = dr["url"].ToString();
-                li.Password = dr["password"].ToString();
-                li.Type = dr["type"].ToString();
-                li.Duration = Convert.ToInt32(dr["duration"]);
-                li.Director = dr["director"].ToString();
-                li.Scriptwriter = dr["scriptwriter"].ToString();
-                li.Actor = dr["actor"].ToString();
-                li.DateRelease = Convert.ToDateTime(dr["date_release"]);
-                li.Language = dr["language"].ToString();
-                li.CategoryId = Convert.ToInt32(dr["category_id"]);
-                list.Add(li);
-            }
-            return list;
-        }
+    //public class MovieControl
+    //{
+    //    public static List<Movie> GetAllMovieList
+    //    {
+    //        get
+    //        {
+    //            string sql = "select * from movie";
+    //            return GetMovie_list(sql);
+    //        }
+    //    }
+    //    public static List<Movie> GetMovie_list(string sql)
+    //    {
+    //        List<Movie> list = new List<Movie>();
+    //        DataSet ds = SQLiteHelper.Query(sql);
+    //        foreach (DataRow dr in ds.Tables[0].Rows)
+    //        {
+    //            Movie li = new Movie();
+    //            li.MovieId = Convert.ToInt32(dr["id"]);
+    //            li.Name = dr["name"].ToString();
+    //            li.Image = dr["image"].ToString();
+    //            li.Summary = dr["summary"].ToString();
+    //            li.IsRecommend = dr["is_recommend"].ToString().ToLower();
+    //            li.BoxOffice = Convert.ToDouble(dr["box_office"]);
+    //            li.Grade = Convert.ToDouble(dr["grade"]);
+    //            li.Url = dr["url"].ToString();
+    //            li.Password = dr["password"].ToString();
+    //            li.Type = dr["type"].ToString();
+    //            li.Duration = Convert.ToInt32(dr["duration"]);
+    //            li.Director = dr["director"].ToString();
+    //            li.Scriptwriter = dr["scriptwriter"].ToString();
+    //            li.Actor = dr["actor"].ToString();
+    //            li.DateRelease = Convert.ToDateTime(dr["date_release"]);
+    //            li.Language = dr["language"].ToString();
+    //            li.CategoryId = Convert.ToInt32(dr["category_id"]);
+    //            list.Add(li);
+    //        }
+    //        return list;
+    //    }
 
-        public static Movie GetMovie(string sql)
-        {
-            DataSet ds = SQLiteHelper.Query(sql);
-            Movie li = new Movie();
-            DataRow dr = ds.Tables[0].Rows[0];
-            li.MovieId = Convert.ToInt32(dr["id"]);
-            li.Name = dr["name"].ToString();
-            li.Image = dr["image"].ToString();
-            li.Summary = dr["summary"].ToString();
-            li.IsRecommend = dr["is_recommend"].ToString().ToLower();
-            li.BoxOffice = Convert.ToDouble(dr["box_office"]);
-            li.Grade = Convert.ToDouble(dr["grade"]);
-            li.Url = dr["url"].ToString();
-            li.Password = dr["password"].ToString();
-            li.Type = dr["type"].ToString();
-            li.Duration = Convert.ToInt32(dr["duration"]);
-            li.Director = dr["director"].ToString();
-            li.Scriptwriter = dr["scriptwriter"].ToString();
-            li.Actor = dr["actor"].ToString();
-            li.DateRelease = Convert.ToDateTime(dr["date_release"]);
-            li.Language = dr["language"].ToString();
-            li.CategoryId = Convert.ToInt32(dr["category_id"]);
-            return li;
-        }
-    }
+    //    public static Movie GetMovie(string sql)
+    //    {
+    //        DataSet ds = SQLiteHelper.Query(sql);
+    //        Movie li = new Movie();
+    //        DataRow dr = ds.Tables[0].Rows[0];
+    //        li.MovieId = Convert.ToInt32(dr["id"]);
+    //        li.Name = dr["name"].ToString();
+    //        li.Image = dr["image"].ToString();
+    //        li.Summary = dr["summary"].ToString();
+    //        li.IsRecommend = dr["is_recommend"].ToString().ToLower();
+    //        li.BoxOffice = Convert.ToDouble(dr["box_office"]);
+    //        li.Grade = Convert.ToDouble(dr["grade"]);
+    //        li.Url = dr["url"].ToString();
+    //        li.Password = dr["password"].ToString();
+    //        li.Type = dr["type"].ToString();
+    //        li.Duration = Convert.ToInt32(dr["duration"]);
+    //        li.Director = dr["director"].ToString();
+    //        li.Scriptwriter = dr["scriptwriter"].ToString();
+    //        li.Actor = dr["actor"].ToString();
+    //        li.DateRelease = Convert.ToDateTime(dr["date_release"]);
+    //        li.Language = dr["language"].ToString();
+    //        li.CategoryId = Convert.ToInt32(dr["category_id"]);
+    //        return li;
+    //    }
+    //}
 
-    public class CategoryControl
-    {
-        public static List<Category> GetCategory()
-        {
-            string sql = "select * from category";
-            List<Category> list = new List<Category>();
-            DataSet ds = SQLiteHelper.Query(sql);
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                Category li = new Category();
-                li.Categoryid = Convert.ToInt32(dr["id"]);
-                li.Name = dr["name"].ToString();
-                list.Add(li);
-            }
-            return list;
-        }
-    }
+    //public class CategoryControl
+    //{
+    //    public static List<Category> GetCategory()
+    //    {
+    //        string sql = "select * from category";
+    //        List<Category> list = new List<Category>();
+    //        DataSet ds = SQLiteHelper.Query(sql);
+    //        foreach (DataRow dr in ds.Tables[0].Rows)
+    //        {
+    //            Category li = new Category();
+    //            li.Categoryid = Convert.ToInt32(dr["id"]);
+    //            li.Name = dr["name"].ToString();
+    //            list.Add(li);
+    //        }
+    //        return list;
+    //    }
+    //}
 }

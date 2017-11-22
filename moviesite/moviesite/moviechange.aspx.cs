@@ -182,6 +182,11 @@ namespace moviesite
                     }
                 }
             }
+
+            if(Request.QueryString["change"] == null&& Request.QueryString["add"] == null&& Request.QueryString["logout"] == null)
+            {
+                Response.Redirect("admin.aspx");
+            }
         }
         public string SaveFile(HttpPostedFile f)
         {
@@ -193,27 +198,6 @@ namespace moviesite
             string fullpath = Path.Combine(path, filename);
             f.SaveAs(Server.MapPath(fullpath));
             return path + filename;
-        }
-        public List<Category> category
-        {
-            get
-            {
-                return GetCategory();
-            }
-        }
-        private List<Category> GetCategory()
-        {
-            List<Category> list = new List<Category>();
-            string sql = string.Format("select * from category");
-            DataSet ds = SQLiteHelper.Query(sql);
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                Category li = new Category();
-                li.Categoryid = Convert.ToInt32(dr["id"]);
-                li.Name = dr["name"].ToString();
-                list.Add(li);
-            }
-            return list;
         }
         public Movie mymovie = new Movie();
     }

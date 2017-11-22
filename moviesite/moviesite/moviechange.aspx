@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>moviechange</title>
+    <title>更改电影信息</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -115,7 +115,7 @@
                     <div class="form-group">
                         <label for="category_id">分类</label>
                         <select class="form-control" id="category_id" name="categoryid">
-                            <% foreach (moviesite.Category li in category)
+                            <% foreach (moviesite.Category li in moviesite.PublicService.GetCategory_List())
                                 { %>
                                 <option value="<%= li.Categoryid %>" <% if (mymovie.CategoryId == li.Categoryid){ %>selected<% } %>><%= li.Name %></option>
                             <% } %>

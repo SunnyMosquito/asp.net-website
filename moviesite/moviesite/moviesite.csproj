@@ -92,7 +92,9 @@
   <ItemGroup>
     <Content Include="about.aspx" />
     <Content Include="admin.aspx" />
+    <Content Include="category.aspx" />
     <Content Include="changeuser.aspx" />
+    <Content Include="contact.aspx" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -141,6 +143,7 @@
     <Content Include="movie.aspx" />
     <Content Include="moviechange.aspx" />
     <Content Include="register.aspx" />
+    <Content Include="search.aspx" />
     <Content Include="tag.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -161,12 +164,26 @@
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="category.aspx.cs">
+      <DependentUpon>category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="category.aspx.designer.cs">
+      <DependentUpon>category.aspx</DependentUpon>
+    </Compile>
     <Compile Include="changeuser.aspx.cs">
       <DependentUpon>changeuser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="changeuser.aspx.designer.cs">
       <DependentUpon>changeuser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="contact.aspx.cs">
+      <DependentUpon>contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="contact.aspx.designer.cs">
+      <DependentUpon>contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -198,12 +215,20 @@
       <DependentUpon>moviechange.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicService.cs" />
     <Compile Include="register.aspx.cs">
       <DependentUpon>register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search.aspx.cs">
+      <DependentUpon>search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search.aspx.designer.cs">
+      <DependentUpon>search.aspx</DependentUpon>
     </Compile>
     <Compile Include="SQLiteHlper.cs" />
     <Compile Include="tag.aspx.cs">
