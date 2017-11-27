@@ -6,16 +6,36 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SQLite;
+using System.Text.RegularExpressions;
 namespace moviesite
 {
     public partial class category : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (Request.QueryString["id"] != null)
             {
                 string id = Request.QueryString["id"];
                 string sql =string.Format("select * from movie where category_id={0}",id);
+                int size =10;
+                string sql1 = string.Format("select count(*) from movie where category_id={0}", id);
+                int page = moviesite.PublicService.GetRow(sql1)/size+1;
+                pagecount = page;
+                int index = 1;
+                if (Convert.ToInt32(Request.QueryString["page"]) > 0&& Convert.ToInt32(Request.QueryString["page"])<=page)
+                {
+                    index = Convert.ToInt32(Request.QueryString["page"]);
+                }
+                if (Convert.ToInt32(Request.QueryString["page"]) < 0 || Convert.ToInt32(Request.QueryString["page"]) > page)
+                {
+                    Response.Redirect("/");
+                }
+                int nextpage = index+1;
+                int prepage = index-1;
+                next = Regex.Replace(Request.Url.ToString(), @"page=(.*)", "page="+nextpage);
+                pre = Regex.Replace(Request.Url.ToString(), @"page=(.*)", "page="+prepage);
+                sql += string.Format(" limit {0} offset {0}*{1}", size, index - 1);//size:每页显示条数，index页码
                 MovieList = GetMovie_list(sql);
             }
             else
@@ -180,5 +200,8 @@ namespace moviesite
             }
             return list;
         }
+        public int pagecount;
+        public string next;
+        public string pre;
     }
 }

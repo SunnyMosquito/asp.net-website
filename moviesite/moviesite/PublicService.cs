@@ -152,5 +152,9 @@ namespace moviesite
             li.CategoryId = Convert.ToInt32(dr["category_id"]);
             return li;
         }
+        public static int GetRow(string sql)
+        {
+            return Convert.ToInt32(SQLiteHelper.ExecuteScalar(sql));
+        }
     }
 }

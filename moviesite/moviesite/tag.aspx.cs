@@ -28,6 +28,12 @@ namespace moviesite
                     }
                 }
                 sql += ") GROUP BY m.id HAVING COUNT(DISTINCT mt.tag_id) ="+idlist.Length;
+                if (Convert.ToInt32(Request.QueryString["page"]) > 0)
+                {
+                    int size = 2;
+                    int index = Convert.ToInt32(Request.QueryString["page"]);
+                    sql += string.Format(" limit {0} offset {0}*{1}", size, index - 1);//size:每页显示条数，index页码
+                }
                 MovieList =moviesite.PublicService.GetMovie_List(sql);
             }
             else
