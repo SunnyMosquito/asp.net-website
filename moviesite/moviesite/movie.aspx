@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
-
+   
     </style>
 </head>
 
@@ -25,25 +25,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">拉普达</a>
+                <a class="navbar-brand" href="/">拉普达</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="about.aspx">About</a></li>
+                    <li><a href="contact.aspx">Contact</a></li>
+                    <li><a href="message.aspx">留言板</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">剧情</a></li>
-                            <li><a href="#">动作</a></li>
-                            <li><a href="#">爱情</a></li>
+                            <% foreach (moviesite.Category cate in moviesite.PublicService.GetCategory_List())
+                                { %>
+                            <li><a href="category.aspx?id=<%= cate.Categoryid %>"><%= cate.Name %></a></li>
+                            <% } %>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.aspx">登录</a></li>
-                    <li><a href="register.aspx">注册</a></li>
+                    <% if (Session["username"] == null)
+                        { %>
+                    <li><a href="/login.aspx?next=<%= HttpContext.Current.Request.RawUrl %>">登录</a></li>
+                    <li><a href="/register.aspx">注册</a></li>
+                    <% }
+                        else
+                        { %>
+                    <li><a href="profile.aspx"><%= Session["username"] %></a></li>
+                    <li><a href="?logout=true">退出</a></li>
+                    <% } %>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -111,19 +121,40 @@
                                             <h5>密码：</h5><%= mymovie.Password %>
                                         </div>
                                         <div class="comment top-50 bottom-50">
-                                            <h5>评论</h5>
-                                            <span>张三李四：<span>他们似乎无法阻止敌人对地球的进攻</span></span>
+                                            <h4>评论</h4>
+                                            <% foreach (moviesite.Comment li in CommentList)
+                                                { %>
+                                            <span><%= li.UserName %><% if (li.PId != "0")
+                                                                        { %> 回复 <%= PComment(li.PId).UserName %><% } %>：<span><%= li.Content %></span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="comment_art" id="<%= li.CommentId %>" name="<%= li.UserName %>">回复</a>
                                             <br>
                                             <br>
-                                            <span>张三李四：<span>他们似乎无法阻止敌人对地球的进攻</span></span>
-                                            <br>
-                                            <br>
-                                            <span>张三李四：<span>他们似乎无法阻止敌人对地球的进攻</span></span>
-                                            <br>
-                                            <br>
-                                            <span>张三李四：<span>他们似乎无法阻止敌人对地球的进攻</span></span>
-                                            <br>
-                                            <br>
+                                            <% } %>
+                                            <script>
+                                                var comment_list = document.getElementsByClassName("comment_art");
+                                                for (var i = 0; i < comment_list.length; i++) {
+                                                    comment_list[i].onclick = (function (i) {
+                                                        return function () {
+                                                            var comment_text = document.getElementById('content');
+                                                            var pid = document.getElementById('pid');
+                                                            pid.setAttribute("value", comment_list[i].getAttribute("id"))
+                                                            comment_text.setAttribute("placeholder", "回复:" + comment_list[i].getAttribute("name"));
+                                                        };
+                                                    })(i);
+                                                }
+                                            </script>
+                                            <form role="form" action="<%= Request.Url %>" method="post">
+                                                <div class="form-group">
+                                                    <label for="content">输入你想说的内容：</label>
+                                                    <textarea class="form-control" id="content" rows="5" name="content"></textarea>
+                                                </div>
+                                                <% if (Session["username"] != null)
+                                                    { %>
+                                                <button type="submit" class="btn btn-default">提交</button>
+                                                <% }else{ %>
+                                                请登录，否则不能评论
+                                                <% } %>
+                                                <input type="text" id="pid" name="pid"style="display:none;"/>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>

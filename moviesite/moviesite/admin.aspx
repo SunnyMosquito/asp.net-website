@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.css">
     <style>
-
     </style>
 </head>
 
@@ -43,7 +42,7 @@
     <div class="container bottom-50" style="min-height: 600px;">
         <div class="page-header">
             <h1>我的网站管理
-                <small>子标题</small>
+                <small>666</small>
             </h1>
         </div>
         <div class="row">
@@ -52,9 +51,8 @@
                 <ul class='nav nav-pills nav-stacked'>
                     <li class='active'><a href='#tab1' data-toggle='tab'>电影</a></li>
                     <li><a href='#tab2' data-toggle='tab'>用户</a></li>
-                    <li><a href='#tab3' data-toggle='tab'>广告</a></li>
-                    <li><a href='#tab4' data-toggle='tab'>分类</a></li>
-                    <li><a href='#tab5' data-toggle='tab'>标签</a></li>
+                    <li><a href='#tab3' data-toggle='tab'>分类</a></li>
+                    <li><a href='#tab4' data-toggle='tab'>标签</a></li>
                 </ul>
             </div>
             <div class="col-md-10">
@@ -73,7 +71,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% foreach(moviesite.Movie movie in GetMovies())
+                                <% foreach (moviesite.Movie movie in GetMovies())
                                     { %>
                                 <tr>
                                     <td><%= movie.Name %></td>
@@ -121,86 +119,87 @@
                         <button class="btn btn-primary" data-toggle="modal" data-target="#useradd">新增用户</button>
                     </li>
                     <li class='tab-pane fade' id='tab3'>
-                        <form role="form">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="form-group">
-                                        <h4>当前广告</h4>
-                                        <img src="img/aa8df3d16e4209cb64ccfe609ab0985d.jpg" style="max-height: 100px;">
-                                        <input type="file" id="avatar1" name="avatar1" />
-                                        <p class="help-block">
-                                            请选择你的广告。。。
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="form-group">
-                                        <h4>当前广告</h4>
-                                        <img src="img/aa8df3d16e4209cb64ccfe609ab0985d.jpg" style="max-height: 100px;">
-                                        <input type="file" id="avatar2" name="avatar2" />
-                                        <p class="help-block">
-                                            请选择你的广告。。。
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="form-group">
-                                        <h4>当前广告</h4>
-                                        <img src="img/aa8df3d16e4209cb64ccfe609ab0985d.jpg" style="max-height: 100px;">
-                                        <input type="file" id="avatar3" name="avatar3" />
-                                        <p class="help-block">
-                                            请选择你的广告。。。
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <button type="submit" class="btn btn-primary">保存更改</button>
+                        <ul class="list-group">
+                            <% foreach (moviesite.Category li in moviesite.PublicService.GetCategory_List())
+                                { %>
+                            <li class="list-group-item">
+                                <a class="badge" href="?delete=category&id=<%= li.Categoryid %>">删除</a>
+                                <%= li.Name %>
+                            </li>
+                            <% } %>
+                        </ul>
+                        <form action="admin.aspx?addcategory=ture" method="post">
+                            <div class="form-group">
+                                <label for="categoryname">分类名称</label>
+                                <input type="text" name="categoryname" class="form-control input-sm" id="categoryname" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">新增</button>
                         </form>
                     </li>
-                 </ul>
-                
-                <!--新增用户 模态框（Modal） -->
-                    <div class="modal fade" id="useradd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form role="form" action="admin.aspx?adduser=true" method="post" enctype="multipart/form-data">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title" id="myModalLabel2">新增用户</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="username">User Name</label>
-                                            <input type="text" name="username" class="form-control" id="username" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <input type="password" name="password" class="form-control" id="password" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="avatar">头像</label>
-                                            <input type="file" id="avatar" name="avatar" />
-                                            <p class="help-block">
-                                                请选择你的头像。。。
-                                            </p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" name="name" class="form-control" id="name" />
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="submit" class="btn btn-primary">提交更改</button>
-                                    </div>
-                                </form>
+                    <li class='tab-pane fade' id='tab4'>
+                        <ul class="list-group">
+                            <% foreach (moviesite.Tag li in moviesite.PublicService.GetTag_List())
+                                { %>
+                            <li class="list-group-item">
+                                <a class="badge" href="?delete=tag&id=<%= li.Tagid %>">删除</a>
+                                <%= li.Name %>
+                            </li>
+                            <% } %>
+                        </ul>
+                        <form action="admin.aspx?addtag=ture" method="post">
+                            <div class="form-group">
+                                <label for="tagyname">标签名称</label>
+                                <input type="text" name="tagname" class="form-control input-sm" id="tagname" />
                             </div>
-                            <!-- /.modal-content -->
+                            <button type="submit" class="btn btn-primary">新增</button>
+                        </form>
+                    </li>
+                </ul>
+
+                <!--新增用户 模态框（Modal） -->
+                <div class="modal fade" id="useradd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form role="form" action="admin.aspx?adduser=true" method="post" enctype="multipart/form-data">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel2">新增用户</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="username">User Name</label>
+                                        <input type="text" name="username" class="form-control" id="username" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" class="form-control" id="password" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="avatar">头像</label>
+                                        <input type="file" id="avatar" name="avatar" />
+                                        <p class="help-block">
+                                            请选择你的头像。。。
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" class="form-control" id="name" />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="submit" class="btn btn-primary">提交更改</button>
+                                </div>
+                            </form>
                         </div>
-                        <!-- /.modal -->
+                        <!-- /.modal-content -->
                     </div>
-            </div><!-- end col -->
-        </div><!-- end row -->
+                    <!-- /.modal -->
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
     </div>
     <!-- end container  -->
     <!-- footer -->

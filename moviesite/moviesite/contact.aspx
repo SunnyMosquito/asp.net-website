@@ -31,6 +31,7 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="about.aspx">About</a></li>
                     <li class="active"><a href="contact.aspx">Contact</a></li>
+                    <li><a href="message.aspx">留言板</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -44,12 +45,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     <% if (Session["username"] == null)
                         { %>
-                    <li><a href="/login.aspx">登录</a></li>
-                    <li><a href="/login.aspx">注册</a></li>
+                    <li><a href="/login.aspx?next=<%= HttpContext.Current.Request.RawUrl %>">登录</a></li>
+                    <li><a href="/register.aspx">注册</a></li>
                     <% }
                         else
                         { %>
-                    <li><a href="../navbar/"><%= Session["username"] %></a></li>
+                    <li><a href="profile.aspx"><%= Session["username"] %></a></li>
                     <li><a href="?logout=true">退出</a></li>
                     <% } %>
                 </ul>

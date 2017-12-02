@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
+using System.Collections;
+
 namespace moviesite
 {
     public partial class moviechange : System.Web.UI.Page
@@ -86,6 +88,19 @@ namespace moviesite
                 };
                 if (SQLiteHelper.ExecuteSql(sql, sps) > 0)
                 {
+                    string sql3 = string.Format("select id from movie order by id desc limit 1");
+                    string movie_id = SQLiteHelper.ExecuteScalar(sql3);
+                    if (Request.Form["tag"] != null)
+                    {
+                        string[] tagid = Request.Form["tag"].Split(',');
+                        ArrayList sqllist = new ArrayList();
+                        foreach (string id in tagid)
+                        {
+                            string sql2 = string.Format("insert into movie__tag values({0},{1});", movie_id, id);
+                            sqllist.Add(sql2);
+                        }
+                        SQLiteHelper.ExecuteSqlTran(sqllist);
+                    }
                     Response.Write("<script>alert('新增成功');window.location.href='admin.aspx';</script>");
                 }
             }
@@ -174,6 +189,17 @@ namespace moviesite
                     };
                     if (SQLiteHelper.ExecuteSql(sql1, sps1) > 0)
                     {
+                        if (Request.Form["tag"] != null)
+                        {
+                            string[] tagid = Request.Form["tag"].Split(',');
+                            ArrayList sqllist = new ArrayList();
+                            foreach (string id in tagid)
+                            {
+                                string sql2 = string.Format("insert into movie__tag values({0},{1});", movie.MovieId, id);
+                                sqllist.Add(sql2);
+                            }
+                            SQLiteHelper.ExecuteSqlTran(sqllist);
+                        }
                         Response.Write("<script>alert('更改成功');window.location.href='admin.aspx';</script>");
                     }
                     else

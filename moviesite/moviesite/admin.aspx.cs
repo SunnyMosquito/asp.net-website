@@ -39,6 +39,10 @@ namespace moviesite
                 {
                     sql = string.Format("delete from movie where id=@para1");
                 }
+                if (Request.QueryString["delete"].ToLower() == "category")
+                {
+                    sql = string.Format("delete from category where id=@para1");
+                }
                 SQLiteParameter[] sps = new SQLiteParameter[] {
                     new SQLiteParameter("@para1",Request.QueryString["id"])
                 };
@@ -79,9 +83,41 @@ namespace moviesite
                     Response.Write(Request.Url + user.UserName + user.PassWord + user.Avatar + user.Name);
                 }
             }
-            if (Request.QueryString["advertising"] != null)
+            if (Request.QueryString["addcategory"] != null)
             {
-                
+                Category cate = new Category();
+                cate.Name = Request.Form["categoryname"];
+                string sql = string.Format("insert into category(name) values (@para1)");
+                SQLiteParameter[] sps = new SQLiteParameter[]
+                {
+                        new SQLiteParameter("@para1",cate.Name)
+                };
+                if (SQLiteHelper.ExecuteSql(sql, sps) > 0)
+                {
+                    Response.Write("<script>alert('新增分类成功！');window.location.href='admin.aspx';</script>");
+                }
+                else
+                {
+                    Response.Write("新增分类失败");
+                }
+            }
+            if (Request.QueryString["addtag"] != null)
+            {
+                Tag tag = new Tag();
+                tag.Name = Request.Form["tagname"];
+                string sql = string.Format("insert into tag(name) values (@para1)");
+                SQLiteParameter[] sps = new SQLiteParameter[]
+                {
+                        new SQLiteParameter("@para1",tag.Name)
+                };
+                if (SQLiteHelper.ExecuteSql(sql, sps) > 0)
+                {
+                    Response.Write("<script>alert('新增标签成功！');window.location.href='admin.aspx';</script>");
+                }
+                else
+                {
+                    Response.Write("新增标签失败");
+                }
             }
         }
         public List<Movie> movies

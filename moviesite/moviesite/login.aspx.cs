@@ -12,7 +12,13 @@ namespace moviesite
         protected void Page_Load(object sender, EventArgs e)
         {
             //Response.Write(Server.MapPath("002.jpg"));
-
+            if (Request.QueryString["logout"] == "true")
+            {
+                Session["username"] = null;
+                Session["is_superuser"] = null;
+                Session["userid"] = null;
+                Response.Redirect("login.aspx");
+            }
             if (Request.RequestType.ToLower() == "post")
             {
                 string username = Request.Form["username"];

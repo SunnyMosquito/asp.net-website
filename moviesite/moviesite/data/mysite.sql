@@ -1,12 +1,12 @@
 CREATE TABLE user(
-    id             INTEGER        PRIMARY KEY  AUTOINCREMENT,
+    id             INTEGER         PRIMARY KEY  AUTOINCREMENT,
     username       NVARCHAR(16)    NOT NULL     UNIQUE,
     password       NVARCHAR(16)    NOT NULL,
     avatar         NVARCHAR(200)   DEFAULT 'upload/avatar/default.png',
     description    NVARCHAR(100),
-    is_superuser   BOOLEAN        DEFAULT 'false',
-    date_joined    DATE           NOT NULL     DEFAULT '2017-11-11',
-    last_login     DATE           DEFAULT '2017-11-11',
+    is_superuser   BOOLEAN         DEFAULT 'false',
+    date_joined    DATE            NOT NULL     DEFAULT '2017-11-11',
+    last_login     DATE            DEFAULT '2017-11-11',
     name           NVARCHAR(50),
     email          NVARCHAR(50),
     qq             NVARCHAR(10),
@@ -15,26 +15,34 @@ CREATE TABLE user(
     address        NVARCHAR(200)
 );
 
+CREATE TABLE message(
+    id             INTEGER        PRIMARY KEY  AUTOINCREMENT,
+    content        NVARCHAR(200)  NOT NULL,
+    date_release   DATE           NOT NULL,
+    user_id        INTEGER        NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(id)
+)
+
 CREATE TABLE tag(
-    id           INTEGER       PRIMARY KEY    AUTOINCREMENT,
+    id           INTEGER        PRIMARY KEY    AUTOINCREMENT,
     name         NVARCHAR(20)   NOT NULL       UNIQUE
 );
 
 CREATE TABLE category(
-    id           INTEGER      PRIMARY KEY  AUTOINCREMENT,
-    name         NVARCHAR(20)  NOT NULL     UNIQUE
+    id           INTEGER        PRIMARY KEY  AUTOINCREMENT,
+    name         NVARCHAR(20)   NOT NULL     UNIQUE
 );
 
 CREATE TABLE movie(
-    id           INTEGER       PRIMARY KEY  AUTOINCREMENT,
-    name         NVARCHAR(50)  NOT NULL     UNIQUE,
-    image        NVARCHAR(200) DEFAULT 'upload/movie/default.png',
+    id           INTEGER        PRIMARY KEY  AUTOINCREMENT,
+    name         NVARCHAR(50)   NOT NULL     UNIQUE,
+    image        NVARCHAR(200)  DEFAULT 'upload/movie/default.png',
     summary      NVARCHAR(300),
-    is_recommend BOOLEAN       DEFAULT 'false',
-    click_count  INTEGER       DEFAULT '0',
-    box_office   REAL          DEFAULT '0',
-    grade        REAL          DEFAULT '0',
-    url          NVARCHAR(200) NOT NULL,
+    is_recommend BOOLEAN        DEFAULT 'false',
+    click_count  INTEGER        DEFAULT '0',
+    box_office   REAL           DEFAULT '0',
+    grade        REAL           DEFAULT '0',
+    url          NVARCHAR(200)  NOT NULL,
     password     NVARCHAR(16),
     date_upload  DATE,
     type         NVARCHAR(50),
@@ -44,27 +52,29 @@ CREATE TABLE movie(
     actor        NVARCHAR(200),
     date_release DATE,
     language     NVARCHAR(20),
-    category_id  INTEGER      NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES category(id)
+    category_id  INTEGER        NOT NULL,
+    user_id      INTEGER        NOT NULL,
+    FOREIGN KEY (category_id)   REFERENCES category(id),
+    FOREIGN KEY (user_id)       REFERENCES user(id)
 );
 
 CREATE TABLE movie__tag(
-	movie_id     INTEGER       NOT NULL,
-	tag_id       INTEGER       NOT NULL,
-	FOREIGN KEY (movie_id) REFERENCES movie(id),
-	FOREIGN KEY (tag_id)   REFERENCES tag(id),
+	movie_id     INTEGER        NOT NULL,
+	tag_id       INTEGER        NOT NULL,
+	FOREIGN KEY (movie_id)      REFERENCES movie(id),
+	FOREIGN KEY (tag_id)        REFERENCES tag(id),
     PRIMARY KEY (movie_id,tag_id)
 );
 
 CREATE TABLE comment(
-    id           INTEGER       PRIMARY KEY    AUTOINCREMENT,
+    id           INTEGER        PRIMARY KEY    AUTOINCREMENT,
     content      NVARCHAR(200),
     date_publish DATE,
-    movie_id     INTEGER       NOT NULL,
-    user_id      INTEGER       NOT NULL,
-    pid_id       INTEGER       NOT NULL,
-    FOREIGN KEY (movie_id) REFERENCES movie(id),
-    FOREIGN KEY (user_id) REFERENCES movie(id)
+    movie_id     INTEGER        NOT NULL,
+    user_id      INTEGER        NOT NULL,
+    pid_id       INTEGER        NOT NULL,
+    FOREIGN KEY (movie_id)      REFERENCES movie(id),
+    FOREIGN KEY (user_id)       REFERENCES movie(id)
 );
 
 insert into user(

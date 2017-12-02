@@ -29,22 +29,31 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="about.aspx">About</a></li>
+                    <li><a href="contact.aspx">Contact</a></li>
+                    <li><a href="message.aspx">留言板</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <% foreach (moviesite.Category cate in moviesite.PublicService.GetCategory_List())
                                 { %>
-                            <li><a href="#"><%= cate.Name %></a></li>
+                            <li><a href="category.aspx?id=<%= cate.Categoryid %>"><%= cate.Name %></a></li>
                             <% } %>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.aspx">登录</a></li>
+                    <% if (Session["username"] == null)
+                        { %>
+                    <li><a href="login.aspx?next=<%= HttpContext.Current.Request.RawUrl %>">登录</a></li>
                     <li><a href="register.aspx">注册</a></li>
+                    <% }
+                        else
+                        { %>
+                    <li><a href="profile.aspx"><%= Session["username"] %></a></li>
+                    <li><a href="?logout=true">退出</a></li>
+                    <% } %>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -83,7 +92,7 @@
                                             { %>disabled<% } %>
                                         "><%= tag.Name %></a></li>
                                     <% } %>
-                                    </ul>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -92,19 +101,19 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">最新推荐</h3>
+                                <h3 class="panel-title">所有结果</h3>
                             </div>
                             <div class="panel-body">
                                 <% foreach (moviesite.Movie li in MovieList)
                                     { %>
-                                <a href="#" class="list-group-item">
+                                <a href="movie.aspx?id=<%= li.MovieId %>" class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-3 col-xs-3">
                                             <img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9">
                                             <h4><%= li.Name %></h4>
-                                            <p>以下实例包含了4个网格，但是我们在小设备浏用工具来解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下我解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下我们在小设备浏览时无法确定网格显示的位置。 为了解决这个问题，可以使用 .clearfix class和 响应式实用工具来解决，如下面实例所示：</p>
+                                            <p><%= li.Summary %></p>
                                         </div>
                                     </div>
                                 </a>
@@ -113,20 +122,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-7 "></div>
-                    <div class="col-md-5 " align="center">
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>
-                </div>
+                
             </div>
             <!-- left side -->
             <div class="col-xs-12 col-md-4">

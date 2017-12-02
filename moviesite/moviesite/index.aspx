@@ -31,6 +31,7 @@
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="about.aspx">About</a></li>
                     <li><a href="contact.aspx">Contact</a></li>
+                    <li><a href="message.aspx">留言板</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -44,12 +45,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     <% if (Session["username"] == null)
                         { %>
-                    <li><a href="/login.aspx">登录</a></li>
-                    <li><a href="/login.aspx">注册</a></li>
+                    <li><a href="/login.aspx?next=<%= HttpContext.Current.Request.RawUrl %>">登录</a></li>
+                    <li><a href="/register.aspx">注册</a></li>
                     <% }
                         else
                         { %>
-                    <li><a href="../navbar/"><%= Session["username"] %></a></li>
+                    <li><a href="profile.aspx"><%= Session["username"] %></a></li>
                     <li><a href="?logout=true">退出</a></li>
                     <% } %>
                 </ul>
@@ -88,16 +89,22 @@
                             <!-- 轮播（Carousel）项目 -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img src="img/5f6f9df55a8f6b59b207fb0cf6798edf.gif" alt="First slide">
-                                    <div class="carousel-caption">标题 1</div>
+                                    <a href="#">
+                                        <img src="img/5f6f9df55a8f6b59b207fb0cf6798edf.gif" alt="First slide">
+                                        <div class="carousel-caption">标题 1</div>
+                                    </a>
                                 </div>
                                 <div class="item">
-                                    <img src="img/d0ea27daa7f57a909306c7be8a262f5c.jpg" alt="Second slide">
-                                    <div class="carousel-caption">标题 2</div>
+                                    <a href="#">
+                                        <img src="img/d0ea27daa7f57a909306c7be8a262f5c.jpg" alt="Second slide">
+                                        <div class="carousel-caption">标题2</div>
+                                    </a>
                                 </div>
                                 <div class="item">
-                                    <img src="img/62ef22ab23569100cff195caac58636b.jpg" alt="Third slide">
-                                    <div class="carousel-caption">标题 3</div>
+                                    <a href="#">
+                                        <img src="img/62ef22ab23569100cff195caac58636b.jpg" alt="Third slide">
+                                        <div class="carousel-caption">标题 3</div>
+                                    </a>
                                 </div>
                             </div>
                             <!-- 轮播（Carousel）导航 -->
@@ -111,7 +118,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">最新推荐<span class="pull-right"><a href="#">more</a></span></h3>
+                                <h3 class="panel-title">最新推荐</h3>
                             </div>
                             <div class="panel-body">
                                 <% foreach (moviesite.Movie li in Recommend_list)
@@ -136,7 +143,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">最多下载<span class="pull-right"><a href="#">more</a></span></h3>
+                                <h3 class="panel-title">最多下载</h3>
                             </div>
                             <div class="panel-body">
                                 <% foreach (moviesite.Movie li in Click_count_list)

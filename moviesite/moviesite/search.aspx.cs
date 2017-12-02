@@ -14,7 +14,7 @@ namespace moviesite
             if (Request.RequestType.ToLower() == "post")
             {
                 string keyword = Request.Form["keyword"];
-                string sql =string.Format("select * from movie where name like '%{0}%'",keyword);
+                string sql =string.Format("select * from movie where name like '%{0}%' limit 10",keyword);
                 SearchMovie_List = moviesite.PublicService.GetMovie_List(sql);
             }
         }

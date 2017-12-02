@@ -30,21 +30,31 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="about.aspx">About</a></li>
+                    <li><a href="contact.aspx">Contact</a></li>
+                    <li><a href="message.aspx">留言板</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">剧情</a></li>
-                            <li><a href="#">动作</a></li>
-                            <li><a href="#">爱情</a></li>
+                            <% foreach (moviesite.Category cate in moviesite.PublicService.GetCategory_List())
+                                { %>
+                            <li><a href="category.aspx?id=<%= cate.Categoryid %>"><%= cate.Name %></a></li>
+                            <% } %>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/">登录</a></li>
-                    <li><a href="../navbar-static-top/">注册</a></li>
+                    <% if (Session["username"] == null)
+                        { %>
+                    <li><a href="/login.aspx">登录</a></li>
+                    <li><a href="/register.aspx">注册</a></li>
+                    <% }
+                        else
+                        { %>
+                    <li><a href="profile.aspx"><%= Session["username"] %></a></li>
+                    <li><a href="?logout=true">退出</a></li>
+                    <% } %>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -99,7 +109,7 @@
     <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrapValidator.js"></script>
-    <script type="text/javascript" src="js/validator.js?d=<%= DateTime.Now %> ">
+    <script type="text/javascript" src="js/validator.js">
     </script>
 </body>
 

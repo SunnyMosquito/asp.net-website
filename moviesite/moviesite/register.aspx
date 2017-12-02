@@ -30,21 +30,22 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="about.aspx">About</a></li>
+                    <li><a href="contact.aspx">Contact</a></li>
+                    <li><a href="message.aspx">留言板</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <% foreach (moviesite.Category li in moviesite.CategoryControl.GetCategory())
+                            <% foreach (moviesite.Category cate in moviesite.PublicService.GetCategory_List())
                                 { %>
-                            <li><a href="#"><%= li.Name %></a></li>
+                            <li><a href="category.aspx?id=<%= cate.Categoryid %>"><%= cate.Name %></a></li>
                             <% } %>
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.aspx">登录</a></li>
+                <ul class="nav navbar-nav navbar-right"> 
+                    <li><a href="/login.aspx">登录</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->

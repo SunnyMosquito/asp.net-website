@@ -1,16 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="moviechange.aspx.cs" Inherits="moviesite.moviechange" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="profile.aspx.cs" Inherits="moviesite.profile" %>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>更改电影信息</title>
+    <title>电影资源下载</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.css">
     <style>
+
     </style>
 </head>
 
@@ -28,88 +28,107 @@
                 <a class="navbar-brand" href="/">拉普达</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="about.aspx">About</a></li>
+                    <li><a href="contact.aspx">Contact</a></li>
+                    <li><a href="message.aspx">留言板</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <% foreach (moviesite.Category cate in moviesite.PublicService.GetCategory_List())
+                                { %>
+                            <li><a href="category.aspx?id=<%= cate.Categoryid %>"><%= cate.Name %></a></li>
+                            <% } %>
+                        </ul>
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a>欢迎,admin</a></li>
-                    <li><a href="/">去我的网站</a></li>
+                    <% if (Session["username"] == null)
+                        { %>
+                    <li><a href="/login.aspx?next=<%= HttpContext.Current.Request.RawUrl %>">登录</a></li>
+                    <li><a href="/login.aspx">注册</a></li>
+                    <% }
+                        else
+                        { %>
+                    <li><a href="profile.aspx"><%= Session["username"] %></a></li>
                     <li><a href="?logout=true">退出</a></li>
+                    <% } %>
                 </ul>
             </div>
             <!--/.nav-collapse -->
         </div>
     </nav>
-    <!-- end Fixed navbar -->
-    <!-- container -->
-    <div class="container bottom-50" style="min-height: 500px;">
+    <!-- Fixed navbar -->
+    <div class="container top-50 bottom-50" style="min-height:600px;">
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div class="page-header">
-                    <h1>更改movie</h1>
+                    <h1>发布电影</h1>
                 </div>
                 <form role="form" action="<%= Request.Url %>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name">名称</label>
-                        <input type="text" class="form-control" id="name" placeholder="请输入名称" name="name" value="<%= mymovie.Name %>">
+                        <input type="text" class="form-control" id="name" placeholder="请输入名称" name="name" />
                     </div>
                     <div class="form-group">
                         <label for="image">图像</label>
                         <input type="file" id="image" name="image">
-                        <p class="help-block">请选择图像，下面是当前图像</p>
-                        <img src="<%= mymovie.Image %>" alt="">
+                        <p class="help-block">请选择图像</p>
                     </div>
                     <div class="form-group">
                         <label for="summary">简介</label>
-                        <textarea class="form-control" id="summary" placeholder="请输入名称" rows="5" name="summary"><%= mymovie.Summary %></textarea>
+                        <textarea class="form-control" id="summary" placeholder="请输入名称" rows="5" name="summary"></textarea>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="isrecommend" <% if (mymovie.IsRecommend == "true")
-                                {%>checked<% } %> />是否推荐<%= mymovie.IsRecommend %>
+                            <input type="checkbox" name="isrecommend" />是否推荐
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="boxoffice">票房</label>
-                        <input type="text" class="form-control" id="boxoffice" placeholder="请输入票房" name="boxoffice" value="<%= mymovie.BoxOffice %>">
+                        <input type="text" class="form-control" id="boxoffice" placeholder="请输入票房" name="boxoffice" />
                     </div>
                     <div class="form-group">
                         <label for="grade">评分</label>
-                        <input type="text" class="form-control" id="grade" placeholder="请输入评分" name="grade" value="<%= mymovie.Grade %>">
+                        <input type="text" class="form-control" id="grade" placeholder="请输入评分" name="grade" />
                     </div>
                     <div class="form-group">
                         <label for="url">链接</label>
-                        <input type="text" class="form-control" id="url" placeholder="请输入链接" name="url" value="<%= mymovie.Url %>">
+                        <input type="text" class="form-control" id="url" placeholder="请输入链接" name="url" />
                     </div>
                     <div class="form-group">
                         <label for="password">密码</label>
-                        <input type="text" class="form-control" id="password" placeholder="请输入链接密码" name="password" value="<%= mymovie.Password %>">
+                        <input type="text" class="form-control" id="password" placeholder="请输入链接密码" name="password" />
                     </div>
                     <div class="form-group">
                         <label for="type">类型</label>
-                        <input type="text" class="form-control" id="type" placeholder="请输入电影类型" name="type" value="<%= mymovie.Type %>">
+                        <input type="text" class="form-control" id="type" placeholder="请输入电影类型" name="type" />
                     </div>
                     <div class="form-group">
                         <label for="duration">时长</label>
-                        <input type="text" class="form-control" id="duration" placeholder="请输入电影时长" name="duration">
+                        <input type="text" class="form-control" id="duration" placeholder="请输入电影时长" name="duration"/>
                     </div>
                     <div class="form-group">
                         <label for="director">导演</label>
-                        <input type="text" class="form-control" id="director" placeholder="请输入导演" name="director" value="<%= mymovie.Director %>">
+                        <input type="text" class="form-control" id="director" placeholder="请输入导演" name="director" />
                     </div>
                     <div class="form-group">
                         <label for="scriptwriter">编剧</label>
-                        <input type="text" class="form-control" id="scriptwriter" placeholder="请输入编剧" name="scriptwriter" value="<%= mymovie.Scriptwriter %>">
+                        <input type="text" class="form-control" id="scriptwriter" placeholder="请输入编剧" name="scriptwriter"/>
                     </div>
                     <div class="form-group">
                         <label for="actor">演员</label>
-                        <input type="text" class="form-control" id="actor" placeholder="请输入演员" name="actor" value="<%= mymovie.Actor %>">
+                        <input type="text" class="form-control" id="actor" placeholder="请输入演员" name="actor" />
                     </div>
                     <div class="form-group">
                         <label for="date_release">上映时间</label>
-                        <input type="date" class="form-control" id="date_release" name="daterelease" value="<%= mymovie.DateRelease.ToString("yyyy-MM-dd") %>">
+                        <input type="date" class="form-control" id="date_release" name="daterelease" />
                     </div>
                     <div class="form-group">
                         <label for="language">语言</label>
-                        <input type="text" class="form-control" id="language" placeholder="请输入语言" name="language" value="<%= mymovie.Language %>">
+                        <input type="text" class="form-control" id="language" placeholder="请输入语言" name="language" />
                     </div>
                     <div class="form-group">
                         <label for="language">标签</label>
@@ -124,10 +143,8 @@
                         <select class="form-control" id="category_id" name="categoryid">
                             <% foreach (moviesite.Category li in moviesite.PublicService.GetCategory_List())
                                 { %>
-                            <option value="<%= li.Categoryid %>" <% if (mymovie.CategoryId == li.Categoryid)
-                                { %>selected<% } %>><%= li.Name %></option>
+                            <option value="<%= li.Categoryid %>"><%= li.Name %></option>
                             <% } %>
-                            <option value="xixi">haha</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-default">提交</button>
@@ -139,7 +156,6 @@
     <!-- end container  -->
     <!-- footer -->
     <footer class="container-fluid" style="background-color: #e7e7e7;">
-        <!--/.container-->
         <p align="center" class="top">
             Copyright &copy;2015 Dreyer
         </p>
@@ -328,10 +344,17 @@
                             }
                         }
                     },
-                    date_release: {
+                    daterelease: {
                         validators: {
                             notEmpty: {
                                 message: '时间不能为空'
+                            }
+                        }
+                    },
+                    image: {
+                        validators: {
+                            notEmpty: {
+                                message: '图像不能为空'
                             }
                         }
                     },
