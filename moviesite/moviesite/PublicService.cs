@@ -142,6 +142,7 @@ namespace moviesite
             li.Grade = Convert.ToDouble(dr["grade"]);
             li.Url = dr["url"].ToString();
             li.Password = dr["password"].ToString();
+            li.DateUpload = Convert.ToDateTime(dr["date_upload"]);
             li.Type = dr["type"].ToString();
             li.Duration = Convert.ToInt32(dr["duration"]);
             li.Director = dr["director"].ToString();

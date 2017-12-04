@@ -78,7 +78,7 @@
                             </div>
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-md-4"><img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive"></div>
+                                    <div class="col-md-4"><img src="<%= mymovie.Image %>" class="img-responsive"></div>
                                     <div class="col-md-8">
                                         <div id="info">
                                             <span>导演:<span><%= mymovie.Director %></span></span>
@@ -96,10 +96,10 @@
                                             <span>语言:<span><%= mymovie.Language %></span></span>
                                             <br>
                                             <br>
-                                            <span>片长:<span><%= mymovie.Duration %></span></span>
+                                            <span>片长:<span><%= mymovie.Duration %>分</span></span>
                                             <br>
                                             <br>
-                                            <span>票房:<span><%= mymovie.BoxOffice %></span></span>
+                                            <span>票房:<span><%= mymovie.BoxOffice %>千万</span></span>
                                             <br>
                                             <br>
                                             <span>上映时间:<span><%= mymovie.DateRelease %></span></span>

@@ -67,12 +67,12 @@
                         <input type="text" name="username" class="form-control" id="InputUserName" />
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" />
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" />
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Retype Password</label>
-                        <input type="password" name="confirmPassword" class="form-control" id="exampleInputPassword1" />
+                        <label for="confirmPassword">Retype Password</label>
+                        <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" />
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">头像</label>
@@ -115,7 +115,80 @@
     <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrapValidator.js"></script>
-    <script type="text/javascript" src="js/validator.js">
+    <script type="text/javascript">
+        $(function () {
+            $('form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    username: {
+                        message: '用户名验证失败',
+                        validators: {
+                            notEmpty: {
+                                message: '用户名不能为空'
+                            },
+                            stringLength: {
+                                min: 5,
+                                max: 18,
+                                message: '用户名长度必须在5到16位之间'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_]+$/,
+                                message: '用户名只能包含大写、小写、数字和下划线'
+                            }
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: '邮箱不能为空'
+                            },
+                            emailAddress: {
+                                message: '邮箱地址格式有误'
+                            }
+                        }
+                    },
+                    avatar: {
+                        validators: {
+                            notEmpty: {
+                                message: '头像不能为空'
+                            }
+                        }
+                    },
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 18,
+                                message: '密码长度必须在6到18位之间'
+                            },
+                        }
+                    },
+                    confirmPassword: {
+                        validators: {
+                            notEmpty: {
+                                message: '确认密码不能为空'
+                            },
+                            identical: {
+                                field: 'password',
+                                message: '两次输入不一样'
+                            },
+                            different: {
+                                field: 'username',
+                                message: '密码跟用户名不能相同'
+                            }
+                        }
+                    },
+                }
+            });
+        });
     </script>
 </body>
 

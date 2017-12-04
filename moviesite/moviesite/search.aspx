@@ -80,7 +80,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">搜索结果<span class="pull-right"><a href="#">more</a></span></h3>
+                                <h3 class="panel-title">搜索结果</h3>
                             </div>
                             <div class="panel-body">
                                 <% if (SearchMovie_List != null)

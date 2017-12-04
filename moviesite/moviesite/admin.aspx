@@ -83,7 +83,7 @@
                                 <% } %>
                             </tbody>
                         </table>
-                        <a href="moviechange.aspx?add=true" class="btn btn-primary">新增电影</a>
+                        <a href="addmovie.aspx" class="btn btn-primary">新增电影</a>
                     </li>
                     <li class='tab-pane fade' id='tab2'>
                         <table class="table table-condensed">

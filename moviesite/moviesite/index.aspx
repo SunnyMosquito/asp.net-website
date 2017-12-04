@@ -126,7 +126,7 @@
                                 <a href="movie.aspx?id=<%= li.MovieId %>" class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-3 col-xs-3">
-                                            <img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive" alt="">
+                                            <img src="<%= li.Image %>" class="img-responsive" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9">
                                             <h4><%= li.Name %></h4>
@@ -151,7 +151,7 @@
                                 <a href="movie.aspx?id=<%= li.MovieId %>" class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-3 col-xs-3">
-                                            <img src="img/9ebd5a8fcd91264f6dae5d823a863306.jpg" class="img-responsive" alt="">
+                                            <img src="<%= li.Image %>" class="img-responsive" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9">
                                             <h4><%= li.Name %></h4>

@@ -14,20 +14,21 @@ namespace moviesite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["username"] == null)
-            //{
-            //    Response.Redirect("~/login.aspx?next=" + HttpContext.Current.Request.Path);
-            //}
-            //if (!(Session["is_superuser"].ToString()=="true"))
-            //{
-            //    Response.Redirect("~/index.aspx");
-            //}
-            //if (Request.QueryString["logout"] == "true")
-            //{
-            //    Session["username"] = null;
-            //    Session["is_superuser"] = null;
-            //    Response.Redirect("login.aspx");
-            //}
+            if (Session["username"] == null)
+            {
+                Response.Redirect("~/login.aspx?next=" + HttpContext.Current.Request.Path);
+            }
+            if (!(Session["is_superuser"].ToString() == "true"))
+            {
+                Response.Redirect("~/index.aspx");
+            }
+            if (Request.QueryString["logout"] == "true")
+            {
+                Session["username"] = null;
+                Session["userid"] = null;
+                Session["is_superuser"] = null;
+                Response.Redirect("login.aspx");
+            }
             if (Request.QueryString["delete"]!=null)
             {
                 string sql="";

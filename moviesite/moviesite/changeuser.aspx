@@ -139,8 +139,8 @@
                             },
                             stringLength: {
                                 min: 1,
-                                max: 200,
-                                message: '名称长度必须在1到200位之间'
+                                max: 300,
+                                message: '简介长度必须在1到300位之间'
                             },
                             regexp: {
                                 regexp: /^[^'"]+$/,
@@ -151,16 +151,16 @@
                     url: {
                         validators: {
                             notEmpty: {
-                                message: '票房不能为空'
+                                message: '链接不能为空'
                             },
                             stringLength: {
                                 min: 1,
                                 max: 200,
-                                message: '名称长度必须在1到200位之间'
+                                message: '链接长度必须在1到200位之间'
                             },
                             regexp: {
                                 regexp: /^[^'"]+$/,
-                                message: '名称包含敏感字符'
+                                message: '链接包含敏感字符'
                             }
                         }
                     },
@@ -170,9 +170,9 @@
                                 message: '密码不能为空'
                             },
                             stringLength: {
-                                min: 4,
-                                max: 18,
-                                message: '密码长度必须在4到18位之间'
+                                min: 6,
+                                max: 16,
+                                message: '密码长度必须在6到16位之间'
                             },
                         }
                     }

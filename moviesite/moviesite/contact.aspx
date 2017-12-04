@@ -94,6 +94,55 @@
     <!-- end footer -->
     <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrapValidator.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    name: {
+                        message: '名字验证失败',
+                        validators: {
+                            notEmpty: {
+                                message: '名字不能为空'
+                            },
+                            stringLength: {
+                                min: 1,
+                                max: 50,
+                                message: '名字长度必须在1到50位之间'
+                            },
+                            regexp: {
+                                regexp: /^[^'"`‘“]+$/,
+                                message: '名称包含敏感字符'
+                            }
+                        }
+                    },
+                    content: {
+                        validators: {
+                            notEmpty: {
+                                message: '内容不能为空'
+                            }
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: '邮箱不能为空'
+                            },
+                            emailAddress: {
+                                message: '邮箱地址格式有误'
+                            }
+                        }
+                    },
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -6,17 +6,21 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SQLite;
-using System.Collections;
 using System.IO;
+using System.Collections;
 namespace moviesite
 {
-    public partial class profile : System.Web.UI.Page
+    public partial class addmovie : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["username"] == null)
             {
                 Response.Redirect("~/login.aspx?next=" + HttpContext.Current.Request.Path);
+            }
+            if (!(Session["is_superuser"].ToString() == "true"))
+            {
+                Response.Redirect("~/index.aspx");
             }
             if (Request.QueryString["logout"] == "true")
             {
@@ -58,11 +62,7 @@ namespace moviesite
                 movie.DateRelease = Convert.ToDateTime(Request.Form["daterelease"]);
                 movie.Language = Request.Form["language"];
                 movie.CategoryId = Convert.ToInt32(Request.Form["categoryid"]);
-                Response.Write(movie.DateRelease);
-                Response.Write(movie.IsRecommend);
-                Response.Write(movie.Duration);
-                Response.Write(movie.Image);
-                string sql = string.Format("insert into movie(name,summary,is_recommend,box_office,grade,url,password,date_upload,type,duration,director,scriptwriter,actor,date_release,language,category_id) values(@para1,@para2,@para3,@para4,@para5,@para6,@para7,@para8,@para9,@para10,@para11,@para12,@para13,@para14,@para15,@para16)");
+                string sql = string.Format("insert into movie(name,summary,is_recommend,box_office,grade,url,password,date_upload,type,duration,director,scriptwriter,actor,date_release,language,category_id,user_id) values(@para1,@para2,@para3,@para4,@para5,@para6,@para7,@para8,@para9,@para10,@para11,@para12,@para13,@para14,@para15,@para16,@para17)");
                 SQLiteParameter[] sps = new SQLiteParameter[]
                 {
                         new SQLiteParameter("@para1",movie.Name),
@@ -80,22 +80,25 @@ namespace moviesite
                         new SQLiteParameter("@para13",movie.Actor),
                         new SQLiteParameter("@para14",movie.DateRelease),
                         new SQLiteParameter("@para15",movie.Language),
-                        new SQLiteParameter("@para16",movie.CategoryId)
+                        new SQLiteParameter("@para16",movie.CategoryId),
+                        new SQLiteParameter("@para17",Session["userid"].ToString())
                 };
                 if (SQLiteHelper.ExecuteSql(sql, sps) > 0)
                 {
+                    string sql3 = string.Format("select id from movie order by id desc limit 1");
+                    string movie_id = SQLiteHelper.ExecuteScalar(sql3);
                     if (Request.Form["tag"] != null)
                     {
                         string[] tagid = Request.Form["tag"].Split(',');
                         ArrayList sqllist = new ArrayList();
                         foreach (string id in tagid)
                         {
-                            string sql2 = string.Format("insert into movie__tag values({0},{1});", movie.MovieId, id);
+                            string sql2 = string.Format("insert into movie__tag values({0},{1});", movie_id, id);
                             sqllist.Add(sql2);
                         }
                         SQLiteHelper.ExecuteSqlTran(sqllist);
                     }
-                    Response.Write("<script>alert('发布成功');window.location.href='profile.aspx';</script>");
+                    Response.Write("<script>alert('新增成功');window.location.href='admin.aspx';</script>");
                 }
             }
         }
